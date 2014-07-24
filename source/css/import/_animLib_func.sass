@@ -1,0 +1,108 @@
+@import "animation"
+
+//Animation Libs
+
+
+@mixin regTranslateXY($animName, $fromX, $fromY, $toX, $toY)
+  +keyframes($animName)
+    0%
+      +transform(translateX($fromX) translateY($fromY) translateZ(0))
+    100%
+      +transform(translateX($toX) translateY($toY) translateZ(0))
+
+@mixin regRotate($animName, $rotation: 0deg)
+  +keyframes($animName)
+    0%
+      +transform(rotate(0))
+    100%
+      +transform(rotate($rotation))
+
+@mixin regUnyo($animName, $scalex: 1.0, $scaley: 1.0, $rotation: 0deg, $tx: 0px, $ty: 0px)
+  +keyframes($animName)
+    0%
+      +transform(scaleX(1.0) scaleY(1.0) rotate(0deg) translateX(0px) translateY(0px))
+    60%
+      +transform(scaleX($scalex) scaleY($scaley) rotate($rotation) translateX($tx) translateY($ty))
+    100%
+      +transform(scaleX(1.0) scaleY(1.0) rotate(0deg) translateX(0px) translateY(0px))
+
+@mixin regBGColor($animName, $originalColor: #000, $changeColor: #000, $timing: 60%)
+  +keyframes($animName)
+    0%
+      background-color: $originalColor
+    #{$timing}
+      background-color: $changeColor
+    100%
+      background-color: $originalColor
+
+@mixin regOpacity($animName, $opacity: 1.0, $timing: 60%)
+  +keyframes($animName)
+    0%
+      +opacity(1.0)
+    #{$timing}
+      +opacity($opacity)
+    100%
+      +opacity(1.0)
+
+
+@mixin unyo($animName, $time: 1s, $delay: 0.0s)
+  +animation($animName $time infinite)
+  animation-delay: $delay
+  -moz-animation-delay: $delay
+  -o-animation-delay: $delay
+  -ms-animation-delay: $delay
+  -webkit-animation-delay: $delay
+
+
+@mixin createUgoUgoAnim($animName, $y, $x: 0)
+  +keyframes($animName)
+    from
+      background-position: $x 0
+    to
+      background-position: $x $y
+
+@mixin delayAnim($delay)
+  animation-delay: $delay
+  -moz-animation-delay: $delay
+  -o-animation-delay: $delay
+  -ms-animation-delay: $delay
+  -webkit-animation-delay: $delay
+
+@mixin alternateAnim()
+  animation-direction: alternate
+  -moz-animation-direction: alternate
+  -o-animation-direction: alternate
+  -ms-animation-direction: alternate
+  -webkit-animation-direction: alternate
+
+
+@mixin creaeFadeIn($animName, $value: 1)
+  +keyframes($animName)
+    from
+      opacity: 0
+    to
+      opacity: $value
+
+@mixin doAnim($animName, $ease: ease, $time: 1s, $alternate: false, $repeat: 1)
+  +animation($animName $time $ease $repeat)
+  @if ($alternate == true)
+    +alternateAnim()
+
+@mixin doUgougoAnim($animName, $time: 1s, $step: 2,  $alternate: false)
+  +animation($animName $time steps($step) infinite)
+  @if ($alternate == true)
+    +alternateAnim()
+
+@mixin bgBox($bg)
+  //text-indent: -9999px
+  background: image-url($bg) no-repeat 0 0
+  width: image-width($bg)
+  height: image-height($bg)
+
+@mixin ugougoBox($bg, $repeatNum)
+  text-indent: -9999px
+  +bgBox($bg)
+  $height: round(image-height($bg) / $repeatNum)
+  height: $height
+
+

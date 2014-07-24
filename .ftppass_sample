@@ -1,0 +1,9 @@
+{
+	"hoge": {
+		"host": "www.example.com",
+		"user": "username",
+		"password": "xxxxxxxx",
+		"remotePath": "/path/to/public_html/"
+	}
+
+}

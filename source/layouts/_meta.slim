@@ -1,0 +1,12 @@
+meta name="keywords" content=data.meta.keywords
+meta name="description" content=data.meta.description
+
+meta property="og:type" content=data.meta.og.type
+meta property="og:locale" content="ja_JP"
+meta property="og:url" content=data.meta.og.url
+meta property="og:title" content=data.meta.title
+meta property="og:site_name" content=data.meta.og.site_name
+meta property="og:description" content=data.meta.og.description
+- data.meta.og.images.each do |image|
+  meta property="og:image" content=image
+/meta property="fb:app_id" content=data.meta.fb.app_id

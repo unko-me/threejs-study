@@ -1,0 +1,11 @@
+.socialBtns
+  ul
+    li.socialBtns__item.socialBtns__item--facebook
+      /- var encodedFBUrl = encodeURIComponent(sns.og.url)
+      /iframe.fb-like src='//www.facebook.com/plugins/like.php?href=#{data.ogp.og.url}&send=false&layout=button_count&width=130&show_faces=false&font&colorscheme=light&action=like&height=21&appId=#{data.ogp.fb.app_id}' scrolling='no' frameborder='0' style='border:none; overflow: hidden; width:130px; height:21px;' allowtransparency='true'
+      .fb-like data-action="like" data-href="http://bapa.ac" data-layout="button_count" data-share="false" data-show-faces="false"
+
+    li.socialBtns__item.socialBtns__item--twitter
+      a.twitter-share-button href="https://twitter.com/share" data-url=data.ogp.og.url data-text="#{data.ogp.title} | #{data.ogp.twitter.text}" data-hashtags=data.ogp.twitter.hashtags data-lang="ja"
+
+  #fb-root

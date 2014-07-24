@@ -1,0 +1,11 @@
+{
+  "name": "project_name",
+  "version": "0.0.0",
+  "dependencies": {
+    "dat.gui": "*",
+    "greensock": "*",
+    "lodash": "*",
+    "jquery": "*",
+    "threejs": "*"
+  }
+}

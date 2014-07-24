@@ -1,0 +1,118 @@
+@import "compass/css3/user-interface"
+@import "compass/css3/opacity"
+
+
+//for +liquidAbs
+$default_width: 1280
+
+@mixin smartphone-init
+  *
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    -webkit-touch-callout: none
+
+  *:not(input):not(textarea)
+    +user-select(none)
+
+@mixin overflow-scroll()
+  -webkit-overflow-scrolling: touch
+  //スクロールが重いのでgpu ON
+  -webkit-transform: translateZ(0px)
+
+
+// shortcut position absolute
+@mixin abs($left: 0, $top: 0, $right: auto, $bottom: auto)
+  position: absolute
+  top: $top
+  left: $left
+  right: $right
+  bottom: $bottom
+
+
+
+@function strip-units($value)
+  @return $value / ($value * 0 + 1)
+
+
+@function getWidthRatio($width, $base_width)
+  @return percentage(getWidthRatioNoUnit($width, $base_width))
+
+@function getWidthRatioNoUnit($width, $base_width)
+  @return strip-units($width) / strip-units($base_width)
+
+
+@function getY($width, $y)
+  @return getWidthRatioNoUnit($width, $default_width) * $y
+
+
+
+
+@mixin setAuto($prop, $value)
+  @if $left == auto
+    $prop: $value / $default_width
+  @else
+    $prop: $value
+
+@mixin liquidAbs($left: 0, $top: 0, $right: auto, $bottom: auto)
+  position: absolute
+
+  +setAuto(left, $left)
+  +setAuto(top, $top)
+  +setAuto(right, $right)
+  +setAuto(bottom, $bottom)
+
+
+@mixin liquidWidth($width)
+  width: getWidthRatio($width, $default_width)
+
+
+@mixin w100()
+  width: 100%
+
+@mixin liquidY($prop, $width, $y)
+  $prop: getY($width, $y)
+
+@mixin fitSectionImgWidth($h1Img, $h2Img, $bodyImg)
+  +fitSectionImg( image-width($h1Img), image-width($h2Img), image-width($bodyImg) )
+
+@mixin fitSectionImg($h1ImgWidth, $h2ImgWidth, $bodyImgWidth)
+  h1 img
+    +liquidWidth($h1ImgWidth)
+  h2 img
+    +liquidWidth($h2ImgWidth)
+  div.body img
+    +liquidWidth($bodyImgWidth)
+
+
+
+//Image
+@mixin imgCenter($img, $width: 1280)
+  position: absolute
+  left: ($width / 2) - (image-width($img) / 2)
+
+@mixin originImgCenter($img)
+  +transform-origin(image-width($img) / 2, image-height($img) / 2)
+
+
+@mixin ghostOverlay($img, $width: 1280px)
+  body.debug
+    .debug-overlay
+      background: image-url($img) 0 0 no-repeat
+      width: $width
+      height: image-height($img)
+
+      border-left: 1px dotted #000
+      border-right: 1px dotted #000
+      opacity: 0.4
+      +abs(50%, 0)
+      margin-left: round($width * -0.5) - 1px
+      z-index: 65555
+
+      @for $i from 1 through 9
+        &.debug-overlay-alpha#{$i}
+          $alpha: $i / 10
+          opacity: #{$alpha}
+      &.hide
+        display: none
+
+
+
