@@ -6,6 +6,7 @@
     "greensock": "*",
     "lodash": "*",
     "jquery": "*",
+    "stats.js": "*",
     "threejs": "*"
   }
 }

@@ -1,10 +1,25 @@
 #= require_tree .
 #= require com/katapad/util/CanvasDetector
+#= require 'stats.js/build/stats.min.js'
 #= require 'threejs/build/three.min.js'
 
 console.info 'hello middleman-scaffold :)'
 
+# stats
+do ->
+  stats = new Stats();
+#  stats.setMode(1);
+  stats.domElement.style.position = 'absolute'
+  stats.domElement.style.left = '0px'
+  stats.domElement.style.top = '0px'
+  document.body.appendChild( stats.domElement)
+  setInterval (->
+    stats.begin()
 
+    # your code goes here
+    stats.end()
+    return
+  ), 1000 / 60
 
 
 
@@ -34,9 +49,15 @@ scene.add(directionalLight)
 # mesh
 geometry = new THREE.CubeGeometry(10, 10, 10)
 material = new THREE.MeshPhongMaterial({color: '#dd3b6f'})
-cube = new THREE.Mesh(geometry, material)
-cube.position.set(0, 0, 0)
-scene.add(cube)
+
+cubes = []
+
+for i in [0..100]
+
+  cube = new THREE.Mesh(geometry, material)
+  cube.position.set((i % 10) * 15 - 50, Math.floor(i / 10) * 15 - 15 * 5, 10 * 1 - 40)
+  scene.add(cube)
+  cubes.push cube
 
 
 
@@ -44,8 +65,10 @@ scene.add(cube)
 render = =>
   requestAnimationFrame(render)
   renderer.render(scene, camera)
-  cube.rotation.x += 0.01
-  cube.rotation.y += 0.01
+  for cube in cubes
+
+    cube.rotation.x += 0.01
+    cube.rotation.y += 0.01
 
 
 
