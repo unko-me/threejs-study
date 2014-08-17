@@ -8,7 +8,6 @@ class CanvasDetector
       return false
 
 
-window.CanvasDetector = CanvasDetector
 if typeof define is "function" and define.amd
   define ->
     CanvasDetector
