@@ -5,9 +5,6 @@
 world = new ThreeWorld()
 oreoreWorld = new OreoreWorld(world)
 
-# Light
-world.setupLight()
-
 oreoreWorld.setup()
 
 

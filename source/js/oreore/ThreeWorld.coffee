@@ -5,14 +5,20 @@ class ThreeWorld
   camera: null
 
 
-  constructor: (args) ->
-    # scene camera
+  constructor: () ->
     @scene = new THREE.Scene()
+    @setup()
 
+
+  setup: =>
+    @setupCamera()
+    @setupRenderer()
+    @setupLight()
+
+
+  setupCamera: ->
     @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 1000)
     @camera.position.set(0, 0, 70)
-
-    @setupRenderer()
 
 
   setupRenderer: ->

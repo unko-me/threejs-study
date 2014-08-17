@@ -1,4 +1,6 @@
 class OreoreWorld
+
+
   constructor: (@world) ->
 
   setup: ->
