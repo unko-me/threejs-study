@@ -27,7 +27,8 @@ class ThreeWorld
       @renderer = new THREE.WebGLRenderer()
     else
       @renderer = new THREE.CanvasRenderer()
-    @renderer.setSize(600, 400)
+    @renderer.setSize($(window).width(), $(window).height())
+#    @renderer.setSize(600, 400)
 
     document.getElementById('renderer').appendChild(@renderer.domElement)
 
