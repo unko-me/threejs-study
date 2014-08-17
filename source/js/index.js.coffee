@@ -1,25 +1,8 @@
-#= require_tree .
 #= require com/katapad/util/CanvasDetector
-#= require 'stats.js/build/stats.min.js'
-#= require 'threejs/build/three.min.js'
+#= require StatsInit
 
 console.info 'hello middleman-scaffold :)'
 
-# stats
-do ->
-  stats = new Stats();
-#  stats.setMode(1);
-  stats.domElement.style.position = 'absolute'
-  stats.domElement.style.left = '0px'
-  stats.domElement.style.top = '0px'
-  document.body.appendChild( stats.domElement)
-  setInterval (->
-    stats.begin()
-
-    # your code goes here
-    stats.end()
-    return
-  ), 1000 / 60
 
 
 

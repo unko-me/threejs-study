@@ -15,14 +15,15 @@ http://goo.gl/RQx4S0
 view = undefined
 mesh = undefined
 timer = undefined
-
+cubes = []
 
 initialize = ->
   directionalLight = createDirectionalLight(0.25, 0x00FFFF)
   view = createView(240, 180, 0x0)
   mesh = createCube(400, 400, 400, directionalLight)
   view.scene.addChild mesh
-  plain = createPlane(100, 100, directionalLight, null, 0, view.scene)
+
+#  plain = createPlane(100, 100, directionalLight, null, 0, view.scene)
   timer = new away.utils.RequestAnimationFrame(rotate)
   timer.start()
   return
