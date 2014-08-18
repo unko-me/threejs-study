@@ -24,3 +24,7 @@ bower_components/
 #IntteliJ IDEA
 *.iml
 /.idea
+
+
+
+source/js/lib/away/
