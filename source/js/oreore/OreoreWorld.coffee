@@ -14,11 +14,6 @@ class OreoreWorld
 
 
 
-
-
-
-
-
   _setupSkybox: ->
     urls = ['HN1A.gif', 'HNC1B.gif', 'aiko7N.gif', 'chiyoko1N.gif', 'kumikoN1A.gif', 'kumikoN1AA.gif']
 
