@@ -17,10 +17,14 @@ class OreoreWorld
   _setupSkybox: ->
     urls = ['HN1A.gif', 'HNC1B.gif', 'aiko7N.gif', 'chiyoko1N.gif', 'kumikoN1A.gif', 'kumikoN1AA.gif']
 
+    path = '/img/uni/'
+    if location.hostname.indexOf('github.io') > -1
+      path = '/threejs-study' + path
+
     materials = []
     for url in urls
       materials.push new THREE.MeshBasicMaterial(
-        map: THREE.ImageUtils.loadTexture('/img/uni/' + url)
+        map: THREE.ImageUtils.loadTexture(path + url)
         side: THREE.BackSide
       )
     skyBox = new THREE.Mesh(new THREE.BoxGeometry(500, 500, 500), new THREE.MeshFaceMaterial(materials))

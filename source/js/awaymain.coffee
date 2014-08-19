@@ -6,9 +6,9 @@ http://goo.gl/RQx4S0
 
 #= require com/katapad/util/CanvasDetector
 #= require 'stats.js/build/stats.min.js'
-#= require './lib/awayjs-core.next.min.js'
-#= require './lib/stagegl-context.next.min.js'
-#= require './lib/stagegl-renderer.next.min.js'
+#= require './lib/away/awayjs-core.next.min.js'
+#= require './lib/away/stagegl-context.next.min.js'
+#= require './lib/away/stagegl-renderer.next.min.js'
 
 
 
