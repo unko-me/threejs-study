@@ -1,0 +1,1 @@
+(function(){var t;t=function(){function t(){}return t.getImgPath=function(t){return location.hostname.indexOf("github.io")>-1?t="/threejs-study"+t:void 0},t}(),"function"==typeof define&&define.amd?define(function(){return t}):"object"==typeof exports?exports.PathUtil=t:window.PathUtil=t}).call(this);
