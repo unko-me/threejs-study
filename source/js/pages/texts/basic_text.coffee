@@ -1,4 +1,5 @@
 #= require StatsInit
+#= require lib/fonts/helvetiker_regular.typeface.js
 #= require oreore/ThreeWorld
 #= require_tree ./
 
@@ -6,7 +7,7 @@
 
 
 world = new ThreeWorld()
-oreoreWorld = new GionWorld(world)
+oreoreWorld = new BasicText(world)
 
 oreoreWorld.setup()
 
