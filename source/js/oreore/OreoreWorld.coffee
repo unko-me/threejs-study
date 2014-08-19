@@ -1,6 +1,5 @@
 class OreoreWorld
 
-
   constructor: (@world) ->
 
   setup: ->
@@ -17,9 +16,9 @@ class OreoreWorld
   _setupSkybox: ->
     urls = ['HN1A.gif', 'HNC1B.gif', 'aiko7N.gif', 'chiyoko1N.gif', 'kumikoN1A.gif', 'kumikoN1AA.gif']
 
-    path = '/img/uni/'
-    if location.hostname.indexOf('github.io') > -1
-      path = '/threejs-study' + path
+    path = './img/uni/'
+#    if location.hostname.indexOf('github.io') > -1
+#      path = '/threejs-study' + path
 
     materials = []
     for url in urls
