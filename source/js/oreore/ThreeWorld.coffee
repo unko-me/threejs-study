@@ -30,6 +30,9 @@ class ThreeWorld
     @renderer.setSize($(window).width(), $(window).height())
 #    @renderer.setSize(600, 400)
 
+#    window.addEventListener( 'resize', @onWindowResize, false )
+    $(window).on('resize', @onWindowResize)
+
     document.getElementById('renderer').appendChild(@renderer.domElement)
 
 
@@ -38,6 +41,16 @@ class ThreeWorld
     directionalLight.position.set(0, 7, 10)
     @scene.add(directionalLight)
 
+
+  @onWindowResize: =>
+    console.log 'resize'
+    #    windowHalfX = window.innerWidth / 2;
+#    windowHalfY = window.innerHeight / 2;
+
+    @world.camera.aspect = window.innerWidth / window.innerHeight;
+    @world.camera.updateProjectionMatrix();
+
+    @renderer.setSize( window.innerWidth, window.innerHeight );
 
   render: =>
     @renderer.render(@scene, @camera)

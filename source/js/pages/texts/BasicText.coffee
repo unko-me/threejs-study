@@ -4,7 +4,7 @@
 ###
 
 
-_DEFAULT_TEXT = 'UNKO.ME 1234'
+_DEFAULT_TEXT = 'UNKO'
 
 class BasicText
   constructor: (@world) ->
@@ -16,10 +16,32 @@ class BasicText
 
   update: =>
 
+    @_yurayura()
+    @_updateCamera()
+
+
+  _angle: 0
+  _updateCamera: =>
+    @world.camera.position.x += Math.sin(@_angle += 0.2)  * 20
+    @world.camera.position.y += Math.cos(@_angle * 0.2)  * 20
+
+
+  _yurayura: ->
+
+    for vertex, i in @_text.geometry.vertices
+      originVertex = @originalBox.vertices[i]
+      vertex.x += (originVertex.x - (vertex.x + (Math.random() * 4 - 2))) * 0.7
+      vertex.y += (originVertex.y - (vertex.y + (Math.random() * 4 - 2))) * 0.7
+      vertex.z += (originVertex.z - (vertex.z + (Math.random() * 4 - 2))) * 0.7
+
+#      vertex.x += (Math.random() * 4 - 2)
+#      vertex.y += (Math.random() * 4 - 2)
+#      vertex.z += (Math.random() * 4 - 2)
+    @_text.geometry.verticesNeedUpdate = true
 
 
   _setupCamera: ->
-    @world.camera.position.set(0, 0, 570)
+    @world.camera.position.set(0, 0, 170)
 
 
 
@@ -36,8 +58,8 @@ class BasicText
     text3d.computeBoundingBox()
     centerOffset = -0.5 * (text3d.boundingBox.max.x - text3d.boundingBox.min.x)
     textMaterial = new THREE.MeshBasicMaterial(
-      color: Math.random() * 0xffffff * 2
-#      overdraw: 0.5
+      color: Math.random() * 0xffffff + 0xFFFF
+      overdraw: 0.5
       wireframe: true
     )
     text = new THREE.Mesh(text3d, textMaterial)
@@ -50,8 +72,8 @@ class BasicText
     group.add text
     @world.scene.add group
 
-
-
+    @_text = text
+    @originalBox = @_text.geometry.clone()
 
 
 
