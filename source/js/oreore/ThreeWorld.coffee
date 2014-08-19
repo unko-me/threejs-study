@@ -27,7 +27,8 @@ class ThreeWorld
       @renderer = new THREE.WebGLRenderer()
     else
       @renderer = new THREE.CanvasRenderer()
-    @renderer.setSize($(window).width(), $(window).height())
+    @onWindowResize()
+#    @renderer.setSize($(window).width(), $(window).height())
 #    @renderer.setSize(600, 400)
 
 #    window.addEventListener( 'resize', @onWindowResize, false )
@@ -42,13 +43,12 @@ class ThreeWorld
     @scene.add(directionalLight)
 
 
-  @onWindowResize: =>
-    console.log 'resize'
+  onWindowResize: =>
     #    windowHalfX = window.innerWidth / 2;
 #    windowHalfY = window.innerHeight / 2;
 
-    @world.camera.aspect = window.innerWidth / window.innerHeight;
-    @world.camera.updateProjectionMatrix();
+    @camera.aspect = window.innerWidth / window.innerHeight;
+    @camera.updateProjectionMatrix();
 
     @renderer.setSize( window.innerWidth, window.innerHeight );
 

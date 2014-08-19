@@ -30,9 +30,9 @@ class BasicText
 
     for vertex, i in @_text.geometry.vertices
       originVertex = @originalBox.vertices[i]
-      vertex.x += (originVertex.x - (vertex.x + (Math.random() * 4 - 2))) * 0.7
-      vertex.y += (originVertex.y - (vertex.y + (Math.random() * 4 - 2))) * 0.7
-      vertex.z += (originVertex.z - (vertex.z + (Math.random() * 4 - 2))) * 0.7
+      vertex.x += (originVertex.x - (vertex.x + (Math.random() * 20 - 10))) * 0.7
+      vertex.y += (originVertex.y - (vertex.y + (Math.random() * 20 - 10))) * 0.7
+      vertex.z += (originVertex.z - (vertex.z + (Math.random() * 20 - 10))) * 0.7
 
 #      vertex.x += (Math.random() * 4 - 2)
 #      vertex.y += (Math.random() * 4 - 2)
