@@ -28,3 +28,4 @@ bower_components/
 
 
 source/js/lib/away/
+source/js/dmm/DMMKey.coffee

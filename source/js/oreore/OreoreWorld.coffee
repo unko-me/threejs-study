@@ -4,6 +4,7 @@ class OreoreWorld
 
   setup: ->
 
+    @_setupAxisHelper()
     @_setupSkybox()
     @_setupCubes()
 
@@ -30,7 +31,9 @@ class OreoreWorld
     @world.scene.add skyBox
 
 
-
+  _setupAxisHelper: ->
+    axis = new THREE.AxisHelper(1000)
+    @world.scene.add axis
 
   _setupCubes: ->
     geometry = new THREE.BoxGeometry(10, 10, 10)

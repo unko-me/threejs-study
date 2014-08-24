@@ -32,6 +32,7 @@ class ThreeWorld
 #    @renderer.setSize(600, 400)
 
 #    window.addEventListener( 'resize', @onWindowResize, false )
+    @renderer.setClearColor(0)
     $(window).on('resize', @onWindowResize)
 
     document.getElementById('renderer').appendChild(@renderer.domElement)
