@@ -8,13 +8,13 @@ world = new ThreeWorld()
 oreoreWorld = new GroundTest(world)
 
 oreoreWorld.setup()
-control = new THREE.TrackballControls(world.camera)
+#control = new THREE.TrackballControls(world.camera)
 
 # update / rendering
 render = =>
   requestAnimationFrame(render)
 
-  control.update()
+#  control.update()
   oreoreWorld.update()
   world.render()
 
