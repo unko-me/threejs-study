@@ -1,0 +1,29 @@
+url: &url
+  'http://www.example.com'
+title: &title
+  'My Site Title'
+description: &description
+  'My Site description'
+keywords: &keywords
+  'My Site keywords,keyword'
+
+twitter:
+  lang: 'ja'
+  hashtags: 'hashtag'
+  site: *title
+  text: *description
+#  text: "#{*title} #{*description}" # 無理
+#  text: *title + ' | ' + *description # 無理
+line:
+  text: *title
+  link: *url
+fb:
+  app_id: '1234'
+og:
+  locale: 'ja_JP'
+  images: ['http://www.example.com/img/ogp.png']
+  url: *url
+  title: *title
+  site_name: *title
+  description: *description
+  type: 'website'
