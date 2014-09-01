@@ -40,7 +40,11 @@ class GroundTest
 
   _setupGround: ->
     geometry = new THREE.PlaneGeometry(300, 300, 30, 30)
-    material = new THREE.MeshBasicMaterial(color: 0x009988, wireframe: true)
+    material = new THREE.MeshBasicMaterial(
+      map: THREE.ImageUtils.loadTexture('../../img/uni/HN1A.gif')
+      side: THREE.DoubleSide
+    )
+#    material = new THREE.MeshBasicMaterial(color: 0x009988, wireframe: true)
 #    material = new THREE.MeshPhongMaterial(color: 0x009988, side: THREE.DoubleSide)
     plane = new THREE.Mesh(geometry, material)
     plane.rotation.x = 90 * Math.PI / 180
