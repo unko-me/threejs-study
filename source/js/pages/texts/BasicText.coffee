@@ -14,16 +14,30 @@ class BasicText
     @_setupCamera()
     @_setupText()
 
-  update: =>
+    $(window).on('click', =>
+      @_invertWire()
+      console.log '@textMaterial.wireframe :', @textMaterial.wireframe
+    )
 
+  _invertWire: =>
+    @textMaterial.wireframe = !@textMaterial.wireframe
+
+  update: =>
     @_yurayura()
     @_updateCamera()
+    @textMaterial.color.setHex(Math.random() * 0xFFFFFF)
+    if Math.random() < 0.04
+      @_invertWire()
+
 
 
   _angle: 0
   _updateCamera: =>
-    @world.camera.position.x += Math.sin(@_angle += 0.2)  * 20
-    @world.camera.position.y += Math.cos(@_angle * 0.2)  * 20
+#    @world.camera.position.x += Math.sin(@_angle += 0.2)  * 2
+    @world.camera.position.x += Math.sin(@_angle)  * 2
+    @world.camera.position.y += Math.cos(@_angle * 0.2)  * 3
+#    @_text.rotation.x = Math.sin(@_angle * 0.2 + 0.1)  * 0.3+  30 * (Math.PI / 180)
+    @_text.rotation.y = Math.cos(@_angle += 0.03)  * 1.2 +  30 * (Math.PI / 180)
 
 
   _yurayura: ->
@@ -60,9 +74,11 @@ class BasicText
     textMaterial = new THREE.MeshBasicMaterial(
       color: Math.random() * 0xffffff + 0xFFFF
       overdraw: 0.5
-      wireframe: true
+#      wireframe: true
     )
     text = new THREE.Mesh(text3d, textMaterial)
+
+    @textMaterial = textMaterial
     text.position.x = centerOffset
     text.position.y = 0
     text.position.z = 0
