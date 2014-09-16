@@ -28,12 +28,15 @@ class ThreeWorld
     else
       @renderer = new THREE.CanvasRenderer()
     @onWindowResize()
+
 #    @renderer.setSize($(window).width(), $(window).height())
 #    @renderer.setSize(600, 400)
 
 #    window.addEventListener( 'resize', @onWindowResize, false )
+    console.log $(window).width(), $(window).height()
     @renderer.setClearColor(0)
     $(window).on('resize', @onWindowResize)
+    @onWindowResize()
 
     document.getElementById('renderer').appendChild(@renderer.domElement)
 
