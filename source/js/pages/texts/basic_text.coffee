@@ -1,7 +1,7 @@
 #= require StatsInit
 #= require lib/fonts/helvetiker_regular.typeface.js
 #= require oreore/ThreeWorld
-#= require_tree ./
+#= require  ./BasicText
 
 
 

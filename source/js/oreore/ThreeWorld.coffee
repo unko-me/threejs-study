@@ -17,7 +17,7 @@ class ThreeWorld
 
 
   setupCamera: ->
-    @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 1000)
+    @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 2000)
     @camera.position.set(0, 0, 70)
 
 

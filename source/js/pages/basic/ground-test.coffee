@@ -1,6 +1,6 @@
 #= require StatsInit
 #= require oreore/ThreeWorld
-#= require_tree ./
+#= require ./GroundTest
 
 
 
