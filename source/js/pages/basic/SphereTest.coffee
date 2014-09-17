@@ -24,6 +24,7 @@ class SphereTest
   update: =>
 #    @sphere.rotation.x += 0.01
     @sphere.rotation.y += 0.02
+    @cylinder.rotation.y -= 0.01
 
   _setupGUI: ->
     gui = new dat.GUI()
@@ -34,21 +35,25 @@ class SphereTest
 
   _setupSphere: ->
     texture = THREE.ImageUtils.loadTexture( "../../img/katapad/yes_02.png" )
-#    texture.wrapS = THREE.RepeatWrapping
-#    texture.wrapT = THREE.RepeatWrapping
-    texture.repeat.set( 2, 1 )
+    texture.wrapS = THREE.RepeatWrapping
+    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set( 3, 1 )
 
     geometry = new THREE.SphereGeometry(30, 32, 32)
     material = new THREE.MeshPhongMaterial(
       map: texture
 #      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
-      side: THREE.BackSide
+#      side: THREE.BackSide
     )
-
-
 
     @sphere = new THREE.Mesh(geometry, material)
     @world.scene.add @sphere
+
+    geo2 = new THREE.CylinderGeometry( 50, 100, 10, 32, 10)
+    @cylinder = new THREE.Mesh(geo2, material)
+    @world.scene.add @cylinder
+    @cylinder.z -= 200
+
 
   _setupLines: ->
     geometry = new THREE.Geometry()
