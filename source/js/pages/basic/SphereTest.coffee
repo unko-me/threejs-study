@@ -12,10 +12,11 @@ class SphereTest
   constructor: (@world) ->
 
   setup: ->
-    @_setupGUI()
+#    @_setupGUI()
 #    @_setupAxisHelper()
     @_setupSphere()
     @_setupLines()
+    @_setupParticle()
 
     @world.camera.position.x += 100
     @world.camera.position.y += 100
@@ -63,6 +64,25 @@ class SphereTest
     line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { color: 0x990000} ) )
     @world.scene.add line
 
+  _setupParticle: ->
+    g = new THREE.Geometry()
+    numParticles = 3000
+    for i in [0..numParticles]
+      xx = Math.random() * 1000 - 500
+      yy = Math.random() * 1000 - 500
+      zz = Math.random() * 1000 - 500
+      g.vertices.push(new THREE.Vector3(xx,yy,zz))
+
+    material = new THREE.ParticleBasicMaterial( {
+      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
+      size: 80
+#      size: 2, color: 0xffffffff,transparent: true, depthTest: true, alpha:1
+    })
+
+    mesh = new THREE.ParticleSystem(g, material)
+##    //mesh.position = new Vector3(0, 0, 0)
+    mesh.sortParticles = false
+    @world.scene.add(mesh)
 
   _setupAxisHelper: ->
     axis = new THREE.AxisHelper(1000)
