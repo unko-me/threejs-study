@@ -33,11 +33,19 @@ class SphereTest
 
 
   _setupSphere: ->
+    texture = THREE.ImageUtils.loadTexture( "../../img/katapad/yes_02.png" )
+#    texture.wrapS = THREE.RepeatWrapping
+#    texture.wrapT = THREE.RepeatWrapping
+    texture.repeat.set( 2, 1 )
+
     geometry = new THREE.SphereGeometry(30, 32, 32)
     material = new THREE.MeshPhongMaterial(
-      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
+      map: texture
+#      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
       side: THREE.BackSide
     )
+
+
 
     @sphere = new THREE.Mesh(geometry, material)
     @world.scene.add @sphere
