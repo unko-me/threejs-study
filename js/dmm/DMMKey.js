@@ -1,1 +1,1 @@
-(function(){var e;e={id:"xePbkyMGdRRe5sXHZxzM"},"function"==typeof define&&define.amd?define(function(){return e}):"object"==typeof exports?exports.DMMKey=e:window.DMMKey=e}).call(this);
+(function(){var e;e="function"==typeof define&&define.amd?define(function(){return e}):"object"==typeof exports?exports.DMMKey=e:window.DMMKey=e}).call(this);
