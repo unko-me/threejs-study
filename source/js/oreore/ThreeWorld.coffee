@@ -23,7 +23,8 @@ class ThreeWorld
 
   setupRenderer: ->
     # render
-    if (CanvasDetector.canWebGL())
+#    if (CanvasDetector.canWebGL())
+    if (Modernizr.webgl)
       @renderer = new THREE.WebGLRenderer()
     else
       @renderer = new THREE.CanvasRenderer()
