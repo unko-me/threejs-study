@@ -13,7 +13,7 @@ class TestData
 
 class Flag1
   _SEGMENT_X = 30
-  _SEGMENT_Y = 30
+  _SEGMENT_Y = 20
   _currentSegment: 0
   _angle: 0
   _list: null
@@ -32,6 +32,7 @@ class Flag1
     @world.camera.lookAt(@plane.position)
 
     @_currentSegment = _SEGMENT_Y
+    @_maxSegment = Math.max(_SEGMENT_X, _SEGMENT_Y) + 3
 
 
   update: =>
@@ -40,7 +41,7 @@ class Flag1
     @_angle += @_data.angle * 0.01
     angle = Math.sin(@_angle)
     @_list.unshift angle
-    if @_list.length > @_currentSegment + 3
+    if @_list.length > @_maxSegment
       @_list.pop()
 
 
