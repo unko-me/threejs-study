@@ -8,6 +8,7 @@ class TestData
 
   angle: 23.5
   depth: 10
+  segments: 10
 
 
 
@@ -31,15 +32,16 @@ class Flag1
     @world.camera.position.z -= 400
     @world.camera.lookAt(@plane.position)
 
-    @_currentSegment = _SEGMENT_Y
+    @_data.segments = _SEGMENT_X + 1
     @_maxSegment = Math.max(_SEGMENT_X, _SEGMENT_Y) + 3
+#    for vertex, i in @plane.geometry.vertices
+#      console.log 'x:', vertex.x, 'y:', vertex.y, (i % (@_currentSegment + 1))
 
 
   update: =>
-
-
     @_angle += @_data.angle * 0.01
     angle = Math.sin(@_angle)
+    # listにpush
     @_list.unshift angle
     if @_list.length > @_maxSegment
       @_list.pop()
@@ -47,8 +49,10 @@ class Flag1
 
     for vertex, i in @plane.geometry.vertices
       originVertex = @originalGeometry.vertices[i]
-#      a = @_list[(i % @_currentSegment)]
-      a = @_list[Math.floor(i / @_currentSegment)]
+
+      a = @_list[(i % @_data.segments)]
+#      a = @_list[(i % (@_currentSegment + 4))]
+#      a = @_list[Math.floor(i / @_currentSegment)]
       sin = Math.sin a
       if sin
         vertex.z = originVertex.z + sin * @_data.depth
@@ -63,6 +67,7 @@ class Flag1
     @_data = new TestData()
     gui.add @_data, 'angle', 1, 100
     gui.add @_data, 'depth', 1, 100
+#    gui.add(@_data, 'segments', 1, 100).step(1)
 
 
   _setupGround: ->
