@@ -23,45 +23,21 @@ class Flag1
   constructor: (@world) ->
 
   setup: ->
-    @_list = new Array(_SEGMENT_X)
+    @_list = new Array(_SEGMENT_X + 1)
     @_setupGUI()
     @_setupAxisHelper()
     @_setupGround()
 
-    #    @world.camera.position.x += 100
-    #    @world.camera.position.y += 100
     @world.camera.position.z -= 400
     @world.camera.lookAt(@plane.position)
 
     @_data.segments = _SEGMENT_X + 1
     @_maxSegment = Math.max(_SEGMENT_X, _SEGMENT_Y) + 3
-#    for vertex, i in @plane.geometry.vertices
-#      console.log 'x:', vertex.x, 'y:', vertex.y, (i % (@_currentSegment + 1))
 
 
   update: =>
-    @_angle += @_data.angle * 0.01
-    angle = Math.sin(@_angle)
-    # listにpush
-    @_list.unshift angle
-    if @_list.length > @_maxSegment
-      @_list.pop()
+    @plane.updateYurayura(@_data.angle * 0.01, @_data.depth)
 
-
-    for vertex, i in @plane.geometry.vertices
-      originVertex = @originalGeometry.vertices[i]
-
-      a = @_list[(i % @_data.segments)]
-#      a = @_list[(i % (@_currentSegment + 4))]
-#      a = @_list[Math.floor(i / @_currentSegment)]
-      sin = Math.sin a
-      if sin
-        vertex.z = originVertex.z + sin * @_data.depth
-      else
-        vertex.z = originVertex.z
-#        console.log 'vertex.z:', vertex.z, a
-
-    @plane.geometry.verticesNeedUpdate = true
 
   _setupGUI: ->
     gui = new dat.GUI()
@@ -77,12 +53,7 @@ class Flag1
       map: THREE.ImageUtils.loadTexture('../../img/yozawa/1000000.jpg')
       side: THREE.DoubleSide
     )
-#    @plane = new THREE.Mesh(geometry, material)
-#    @plane.rotation.y = 180 * Math.PI / 180
-    _.delay ->
-
     @plane = new FlagPlane(geometry, material)
-    @originalGeometry = geometry.clone()
 
     @world.scene.add @plane
 

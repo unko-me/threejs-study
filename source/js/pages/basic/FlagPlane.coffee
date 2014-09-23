@@ -8,6 +8,37 @@ class FlagPlane extends THREE.Mesh
 
   _init: ->
     @rotation.y = 180 * Math.PI / 180
+    @originalGeometry = @geometry.clone()
+    @_list = new Array(30)
+    @_angle = 0
+
+
+  updateYurayura: (amp, @depth)->
+    @_angle += amp
+    angle = Math.sin(@_angle)
+    # listにpush
+    @_list.unshift angle
+    if @_list.length > @_maxSegment
+      @_list.pop()
+
+    @_updateVertex()
+
+
+  _updateVertex: ->
+    for vertex, i in @geometry.vertices
+      originVertex = @originalGeometry.vertices[i]
+
+      a = @_list[(i % 31)]
+      sin = Math.sin a
+      if sin
+        vertex.z = originVertex.z + sin * @depth
+      else
+        vertex.z = originVertex.z
+
+    @geometry.verticesNeedUpdate = true
+
+
+
 
 
 
