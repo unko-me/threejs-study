@@ -7,8 +7,8 @@
 class TestData
   constructor: () ->
 
-  angle: 23.5
-  depth: 10
+  angle: 30
+  depth: 19
   segments: 10
 
 
@@ -19,24 +19,28 @@ class Flag1
   _currentSegment: 0
   _angle: 0
   _list: null
+  _planes: null
 
   constructor: (@world) ->
 
   setup: ->
     @_list = new Array(_SEGMENT_X + 1)
     @_setupGUI()
-    @_setupAxisHelper()
+#    @_setupAxisHelper()
     @_setupGround()
 
-    @world.camera.position.z -= 400
-    @world.camera.lookAt(@plane.position)
+    @world.camera.position.y += 100
+    @world.camera.position.z -= 900
+#    @world.camera.lookAt(@plane.position)
+    @world.camera.lookAt(new THREE.Vector3())
+
 
     @_data.segments = _SEGMENT_X + 1
-    @_maxSegment = Math.max(_SEGMENT_X, _SEGMENT_Y) + 3
 
 
   update: =>
-    @plane.updateYurayura(@_data.angle * 0.01, @_data.depth)
+    for plane in @_planes
+      plane.updateYurayura(@_data.angle * 0.01, @_data.depth)
 
 
   _setupGUI: ->
@@ -53,8 +57,18 @@ class Flag1
       map: THREE.ImageUtils.loadTexture('../../img/yozawa/1000000.jpg')
       side: THREE.DoubleSide
     )
-    @plane = new FlagPlane(geometry, material)
-    @world.scene.add @plane
+
+    @_planes = []
+    for i in [0...100]
+      plane = new FlagPlane(geometry, material)
+      @_planes.push plane
+      @world.scene.add plane
+      plane.position.x = 5 * i
+      plane.position.y = 5 * i
+      plane.position.z = 8 * i
+      plane.rotation.z += i * 3.5 * Math.PI / 180
+#      plane.rotation.x += i * 2.5 * Math.PI / 180
+#      plane.rotation.y += i * Math.PI / 180
 
 
 
@@ -86,13 +100,13 @@ do ->
   oreoreWorld = new Flag1(world)
 
   oreoreWorld.setup()
-  #control = new THREE.TrackballControls(world.camera)
+  control = new THREE.TrackballControls(world.camera)
 
   # update / rendering
   render = =>
     requestAnimationFrame(render)
 
-    #  control.update()
+    control.update()
     oreoreWorld.update()
     world.render()
 
