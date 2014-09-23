@@ -1,5 +1,6 @@
 #= require StatsInit
 #= require oreore/ThreeWorld
+#= require ./FlagPlane
 
 
 
@@ -76,12 +77,14 @@ class Flag1
       map: THREE.ImageUtils.loadTexture('../../img/yozawa/1000000.jpg')
       side: THREE.DoubleSide
     )
-    plane = new THREE.Mesh(geometry, material)
-    plane.rotation.y = 180 * Math.PI / 180
-    @plane = plane
+#    @plane = new THREE.Mesh(geometry, material)
+#    @plane.rotation.y = 180 * Math.PI / 180
+    _.delay ->
+
+    @plane = new FlagPlane(geometry, material)
     @originalGeometry = geometry.clone()
 
-    @world.scene.add plane
+    @world.scene.add @plane
 
 
 
