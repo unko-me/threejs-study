@@ -54,7 +54,6 @@ class Flag1
       side: THREE.DoubleSide
     )
     @plane = new FlagPlane(geometry, material)
-
     @world.scene.add @plane
 
 
