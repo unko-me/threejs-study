@@ -8,6 +8,7 @@
     "jquery": "*",
     "stats.js": "*",
     "threejs": "*",
-    "moment": "*"
+    "moment": "*",
+    "eventemitter2": "~0.4.14"
   }
 }
