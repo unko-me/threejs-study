@@ -29,6 +29,9 @@ class FlagParlinPlane extends THREE.Mesh
 
     @_updateVertex()
 
+  update: ->
+    @_updateVertex()
+
 
   _updateVertex: ->
     for vertex, i in @geometry.vertices

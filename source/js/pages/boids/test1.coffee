@@ -3,7 +3,14 @@
 #= require oreore/ThreeWorld
 #= require ../basic/FlagParlinPlane
 
+###
+Boidのテスト1
+  hughsk/boids
+https://github.com/hughsk/boids
 
+
+
+###
 
 class TestData
   constructor: () ->

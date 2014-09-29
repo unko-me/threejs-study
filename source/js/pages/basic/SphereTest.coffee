@@ -18,6 +18,12 @@ class SphereTest
     @_setupLines()
     @_setupParticle()
 
+#    width = 1000
+#    height = 800
+#    @world.camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 2000 )
+#    @world.scene.add @world.camera
+#    @world.camera.position.z -= 1000
+
     @world.camera.position.x += 100
     @world.camera.position.y += 100
 #    @world.camera.lookAt(@plane.position)
