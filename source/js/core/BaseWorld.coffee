@@ -6,8 +6,9 @@ class BaseWorld
 
   ###*
   option
-  option.clearColor
-  option.clearAlpha
+  option.clear
+  option.clear.alpha
+  option.clear.color
   ###
   constructor: (@option) ->
     @scene = new THREE.Scene()
@@ -24,10 +25,13 @@ class BaseWorld
   setupCamera: ->
     @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 2000)
     @_setupCameraPos()
+    @_setupCameraLookAt()
+
+  _setupCameraLookAt: ->
+    @camera.lookAt(new THREE.Vector3())
 
   _setupCameraPos: ->
     @camera.position.set(400, 1200, 700)
-    @camera.lookAt(new THREE.Vector3())
 
   setupRenderer: ->
 #    if (CanvasDetector.canWebGL())
@@ -45,8 +49,8 @@ class BaseWorld
     document.getElementById('renderer').appendChild(@renderer.domElement)
 
   _setupClearColor: ->
-    clearColor = @option?.clearColor || 0
-    clearAlpha = @option?.clearAlpha || 0
+    clearColor = @option?.clear?.color || 0
+    clearAlpha = @option?.clear?.alpha || 0
     @renderer.setClearColor(clearColor, clearAlpha)
 
 
