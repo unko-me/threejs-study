@@ -44,7 +44,7 @@ class ThreeWorld
 
   setupLight: ->
     directionalLight = new THREE.DirectionalLight('#ffffff', 1)
-    directionalLight.position.set(0, 7, 10)
+    directionalLight.position.set(0, 1300, 10)
     @scene.add(directionalLight)
 
 
