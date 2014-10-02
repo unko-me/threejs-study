@@ -40,9 +40,7 @@ class BaseWorld
     else
       @renderer = new THREE.CanvasRenderer()
 
-    @onWindowResize()
-
-    $(window).on('resize', @onWindowResize)
+    window.addEventListener('resize', @onWindowResize)
     @onWindowResize()
 
     @_setupClearColor()
