@@ -20,7 +20,14 @@
   <body class="pages pages_model pages_model_dennys">
     <div id="wrapper">
       <header></header><div id="renderer"></div>
-      <script src="../../js/three.lib.js?1412064932" type="text/javascript"></script><script src="../../js/pages/model/dennystest.js?1412064912" type="text/javascript"></script><footer></footer>
+      <script src="../../js/three.lib.js?1412064932" type="text/javascript"></script><!---http://blog.project-nya.jp/1669 より-->
+      <script id="vertexshader" type="x-shader/x-vertex">
+        uniform float time;uniform float size;attribute float lifetime;attribute float shift;varying float t;varying float alpha;void main() {  t = fract(time/lifetime + shift);  float v = sqrt(t)/2.0;  alpha = 1.0 - smoothstep(0.0, 1.0, t);  vec3 p = position*vec3(v, t, v);  vec4 mvPosition = modelViewMatrix*vec4(p, 1.8);  gl_PointSize = size*(1.0 - t);  gl_Position = projectionMatrix*mvPosition;}
+      </script>
+      <script id="fragmentshader" type="x-shader/x-fragment">
+        uniform vec3 startColor;uniform vec3 offsetColor;uniform sampler2D texture;varying float t;varying float alpha;void main() {  vec3 color = startColor + offsetColor*vec3(t, t, t);  gl_FragColor = texture2D(texture, gl_PointCoord)*vec4(color, alpha);}
+      </script>
+      <script src="../../js/pages/model/dennystest.js?1412260642" type="text/javascript"></script><footer></footer>
     </div>
   </body>
 </html>
