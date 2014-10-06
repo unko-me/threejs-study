@@ -1,0 +1,1 @@
+(function(){this.onmessage=function(t){var n,e,a,s,o,c;for(a=t.data,n=0,e=function(t){var e;e=new XMLHttpRequest,e.onreadystatechange=function(){var t;try{4===e.readyState&&(n++,postMessage(n<a.length?"next":"end"))}catch(s){t=s}},e.open("GET",t,!1),e.send(null)},o=0,c=a.length;c>o;o++)s=a[o],e(s)}}).call(this);
