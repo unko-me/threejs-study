@@ -1,15 +1,30 @@
 @charset "utf-8"
 @import "reset"
+@import "compass/css3/images"
+@import "compass/css3/transform"
+@import "compass/css3/transition"
 
 body
   background: #d4d4d4
   font-family: "游ゴシック","YuGothic","Hiragino Kaku Gothic ProN","Hiragino Kaku Gothic Pro","ＭＳ ゴシック",sans-serif
   line-height: 1.5
+  color: #FFFFFF
 
 a
+  color: #FFFFFF
   &:hover
     text-decoration: none
-    background: rgba(187, 204, 38, 0.30)
+    //background: rgba(219, 235, 41, 0.87)
+    +background-image(linear-gradient(45deg, hsla(61, 98%, 48%, 1) 0%, hsla(61, 98%, 48%, 0) 70%), linear-gradient(315deg, hsla(355, 99%, 43%, 1) 10%, hsla(355, 99%, 43%, 0) 80%), linear-gradient(225deg, hsla(325, 91%, 50%, 1) 10%, hsla(325, 91%, 50%, 0) 80%), linear-gradient(135deg, hsla(265, 99%, 49%, 1) 100%, hsla(265, 99%, 49%, 0) 70%))
+
+
+.colorful-bg
+  //height: 100%
+  //+background-image(linear-gradient(45deg, hsla(61, 98%, 48%, 1) 0%, hsla(61, 98%, 48%, 0) 70%), linear-gradient(315deg, hsla(355, 99%, 43%, 1) 10%, hsla(355, 99%, 43%, 0) 80%), linear-gradient(225deg, hsla(325, 91%, 50%, 1) 10%, hsla(325, 91%, 50%, 0) 80%), linear-gradient(135deg, hsla(265, 99%, 49%, 1) 100%, hsla(265, 99%, 49%, 0) 70%))
+
+  +background-image(linear-gradient(45deg, hsla(192, 94%, 48%, 1) 0%, hsla(192, 94%, 48%, 0) 70%), linear-gradient(135deg, hsla(38, 97%, 43%, 1) 10%, hsla(38, 97%, 43%, 0) 80%), linear-gradient(225deg, hsla(280, 97%, 50%, 1) 10%, hsla(280, 97%, 50%, 0) 80%), linear-gradient(315deg, hsla(43, 96%, 44%, 1) 100%, hsla(43, 96%, 44%, 0) 70%))
+  background-size: contain
+  background-attachment: fixed
 
 
 #renderer

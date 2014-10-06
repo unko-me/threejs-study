@@ -2,7 +2,10 @@
   - title = current_page.data.title + ' | ' + data.meta.title
 - else
   - title = data.meta.title
-
+- if current_page.data.colofulBgClass
+  - colofulBgClass = 'colorful-bg'
+- else
+  - colofulBgClass = ''
 doctype 5
 /![if lt IE 7]><html class="no-js ie6 oldie" lang="ja"><![endif]
 /![if IE 7]><html class="no-js ie7 oldie" lang="ja"><![endif]
@@ -23,7 +26,7 @@ html class="no-js" lang="ja"
 
     == partial 'layouts/meta'
 
-  body class="#{page_classes}"
+  body class="#{page_classes} #{colofulBgClass}"
     #wrapper
       == partial 'layouts/header'
       == yield
