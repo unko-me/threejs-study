@@ -23,7 +23,7 @@ class BaseWorld
 
 
   setupCamera: ->
-    @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 2000)
+    @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000)
     @_setupCameraPos()
     @_setupCameraLookAt()
 
@@ -61,9 +61,12 @@ class BaseWorld
       @scene.add(new THREE.AmbientLight(@option?.amibientLight.color))
 
   _setupDirectionalLight: ->
-    @_directionalLight = new THREE.DirectionalLight('#ffffff', 1)
-    @_directionalLight.position.set(0, 1300, -10)
+    @_directionalLight = new THREE.DirectionalLight(0xffffff, 2)
+    @_directionalLight.position.set(0, 300, 100)
     @scene.add(@_directionalLight)
+#    lightHelper = new THREE.DirectionalLightHelper(@_directionalLight, 50)
+#    @scene.add(lightHelper);
+
 
   setupControl: ->
     @control = new THREE.TrackballControls(@camera)
