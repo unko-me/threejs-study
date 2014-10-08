@@ -1,0 +1,2 @@
+[Wed Oct 08 2014 03:51:43 GMT+0900 (JST)] Layer "sofmap_texture.png のコピー": Expected end of input but "\u306E" found.
+[Wed Oct 08 2014 03:51:43 GMT+0900 (JST)] Layer "sofmap_texture.png のコピー 2": Expected end of input but "\u306E" found.
