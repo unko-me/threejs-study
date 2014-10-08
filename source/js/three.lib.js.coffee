@@ -5,4 +5,5 @@
 #= require 'lib/perlin.js'
 #= require 'threejs/build/three.min.js'
 #= require 'dat.gui/dat.gui.min.js'
+#= require greensock/src/minified/TweenMax.min.js
 #= require_tree ./lib/three
