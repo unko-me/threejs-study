@@ -19,14 +19,17 @@ class SofmapTest extends BaseWorld
   _setup: ->
     @camera.position.x -=1000
     @camera.position.y -=400
+#    @camera.position.y =4000
     @renderer.shadowMapEnabled = true
     @_directionalLight.caastShadow = true
     spotLight = new THREE.SpotLight(0xffffff, 0.5, 0, Math.PI / 6 , 10)
     @scene.add spotLight
-    spotLight.position.set(-300, 400, 200)
+    spotLight.position.set(-600, 1000, 1200)
     spotLight.castShadow = true
-#    lightHelper = new THREE.SpotLightHelper(spotLight)
-#    @scene.add lightHelper
+    spotLight.shadowMapWidth  = 150
+    spotLight.shadowMapHeight = 150
+    lightHelper = new THREE.SpotLightHelper(spotLight)
+    @scene.add lightHelper
 
     @_setupSofmapBoard()
     @_setupGround()

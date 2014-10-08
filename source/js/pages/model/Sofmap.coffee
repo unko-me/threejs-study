@@ -35,11 +35,14 @@ class Sofmap extends THREE.Object3D
     @add @planeLeft
     @add @planeRight
 
-    @castShadow = @planeLeft.castShadow = @planeRight.castShadow = true
+    @planeLeft.castShadow = @planeRight.castShadow = true
+#    @castShadow = true
 
 
   update: =>
-#    @planeRight.rotation.y += Math.sin((Date.now() / 200)) * 0.1
+    now = Date.now()
+    @planeLeft.rotation.y  = Math.cos((now / 100) % 60) * 0.31 - Math.sin((now / 100) % 10) * 0.31
+    @planeRight.rotation.y = Math.sin((now / 200) % 70) * 0.25 - Math.cos((now / 100)) * 0.11 -75 * Math.PI / 180
 
 
 if typeof define is "function" and define.amd
