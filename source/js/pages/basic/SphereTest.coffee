@@ -32,6 +32,12 @@ class SphereTest
 #    @sphere.rotation.x += 0.01
     @sphere.rotation.y += 0.02
     @cylinder.rotation.y -= 0.01
+    @particle.rotation.y += 0.001
+
+  loadImage: (base64)=>
+    texture = THREE.ImageUtils.loadTexture(base64)
+    @material.map = texture
+    @particleMaterial.map = texture
 
   _setupGUI: ->
     gui = new dat.GUI()
@@ -47,17 +53,18 @@ class SphereTest
     texture.repeat.set( 3, 1 )
 
     geometry = new THREE.SphereGeometry(30, 32, 32)
-    material = new THREE.MeshPhongMaterial(
+    @material = new THREE.MeshPhongMaterial(
       map: texture
 #      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
 #      side: THREE.BackSide
     )
 
-    @sphere = new THREE.Mesh(geometry, material)
+    @sphere = new THREE.Mesh(geometry, @material)
+
     @world.scene.add @sphere
 
     geo2 = new THREE.CylinderGeometry( 50, 100, 10, 32, 10)
-    @cylinder = new THREE.Mesh(geo2, material)
+    @cylinder = new THREE.Mesh(geo2, @material)
     @world.scene.add @cylinder
     @cylinder.z -= 200
 
@@ -79,16 +86,16 @@ class SphereTest
       zz = Math.random() * 1000 - 500
       g.vertices.push(new THREE.Vector3(xx,yy,zz))
 
-    material = new THREE.ParticleBasicMaterial( {
+    @particleMaterial = new THREE.ParticleBasicMaterial( {
       map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
       size: 80
 #      size: 2, color: 0xffffffff,transparent: true, depthTest: true, alpha:1
     })
 
-    mesh = new THREE.ParticleSystem(g, material)
-##    //mesh.position = new Vector3(0, 0, 0)
-    mesh.sortParticles = false
-    @world.scene.add(mesh)
+    @particle = new THREE.ParticleSystem(g, @particleMaterial)
+##    //@particle.position = new Vector3(0, 0, 0)
+    @particle.sortParticles = false
+    @world.scene.add(@particle)
 
   _setupAxisHelper: ->
     axis = new THREE.AxisHelper(1000)
