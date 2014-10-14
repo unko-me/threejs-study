@@ -16,6 +16,17 @@ class UVMozaic extends BaseWorld
   _setup: ->
     @camera.position.set(0, 0, 50)
     @_setupCubes()
+    @_setupLight()
+
+  _setupLight: ->
+    spotLight = new THREE.SpotLight(0xffffff, 0.5, 0, Math.PI / 6 , 10)
+    @scene.add spotLight
+    spotLight.position.set(-100, 200, 300)
+    spotLight.castShadow = true
+    spotLight.shadowMapWidth  = 150
+    spotLight.shadowMapHeight = 150
+#    lightHelper = new THREE.SpotLightHelper(spotLight)
+#    @scene.add lightHelper
 
 
   _setupCubes: ->
@@ -24,7 +35,8 @@ class UVMozaic extends BaseWorld
     geometry = new THREE.BoxGeometry(width, width, width)
     @originalBox = geometry.clone()
 
-    texture = THREE.ImageUtils.loadTexture('../../img/sofmap/sofmap-assets/sofmap_512.png')
+    texture = THREE.ImageUtils.loadTexture('../../img/uni/HN1A.gif')
+#    texture = THREE.ImageUtils.loadTexture('../../img/sofmap/sofmap-assets/sofmap_512.png')
     material = new THREE.MeshLambertMaterial(
       color: '#dd3b6f'
       map: texture
