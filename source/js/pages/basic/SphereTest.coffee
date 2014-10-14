@@ -92,6 +92,14 @@ class SphereTest
 #      size: 2, color: 0xffffffff,transparent: true, depthTest: true, alpha:1
     })
 
+    # ゴゴゴがうまくいかないな
+#    @particleMaterial = new THREE.ParticleBasicMaterial( {
+#      map: THREE.ImageUtils.loadTexture('../../img/particle/gogogo.png')
+#      size: 80
+#      transparent: true
+#      depthTest: true
+#    })
+
     @particle = new THREE.ParticleSystem(g, @particleMaterial)
 ##    //@particle.position = new Vector3(0, 0, 0)
     @particle.sortParticles = false

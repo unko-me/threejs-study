@@ -21,7 +21,8 @@ class ShaderTest1 extends BaseWorld
 
     vertexShader = document.getElementById("vertexshader").textContent
     fragmentShader = document.getElementById("fragmentshader").textContent
-    texture = THREE.ImageUtils.loadTexture("../../img/particle/particle.png")
+    texture = THREE.ImageUtils.loadTexture("../../img/particle/gogogo.png")
+#    texture = THREE.ImageUtils.loadTexture("../../img/particle/particle.png")
     uniforms =
       time:
         type: "f"
@@ -89,7 +90,7 @@ class ShaderTest1 extends BaseWorld
     @_updateParticle()
 
   _updateParticle: ->
-    @particles.material.uniforms.time.value = (Date.now() - @_startTime)/300
+    @particles.material.uniforms.time.value = (Date.now() - @_startTime) / 3000
 
 
 
