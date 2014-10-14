@@ -3,8 +3,11 @@
 
 
 class UVMozaic extends BaseWorld
+  ROW = 10
+  COL = 10
+  CUBE_WIDTH = 10
 
-  NUM_CUBES = 100
+  NUM_CUBES = ROW * COL
 
   constructor: () ->
     super(
@@ -15,6 +18,7 @@ class UVMozaic extends BaseWorld
 
   _setup: ->
     @camera.position.set(0, 0, 50)
+    @camera.position.set(0, 0, 10)
     @_setupCubes()
     @_setupLight()
 
@@ -30,24 +34,28 @@ class UVMozaic extends BaseWorld
 
 
   _setupCubes: ->
-    width = 10
-
-    geometry = new THREE.BoxGeometry(width, width, width)
-    @originalBox = geometry.clone()
 
     texture = THREE.ImageUtils.loadTexture('../../img/uni/HN1A.gif')
 #    texture = THREE.ImageUtils.loadTexture('../../img/sofmap/sofmap-assets/sofmap_512.png')
     material = new THREE.MeshLambertMaterial(
-      color: '#dd3b6f'
       map: texture
     )
 
+
     @cubes = []
 
-    rotation = 0.05
+    rotation = 0.015
+    w = 1.0 / COL
+    h = 1.0 / ROW
+
     for i in [0...NUM_CUBES]
+      x = (i % 10)
+      y = Math.floor(i / 10)
+      geometry = @_createGeometry(w, h, x, y)
+      console.log 'geometry.faceVertexUvs:', geometry.faceVertexUvs
+
       cube = new THREE.Mesh(geometry, material)
-      cube.position.set((i % 10) * width - 50, Math.floor(i / 10) * width - width * 5, 10 * 1 - 40)
+      cube.position.set(x * CUBE_WIDTH - 50, y * CUBE_WIDTH - CUBE_WIDTH * 5, 10 * 1 - 40)
       @scene.add(cube)
       @cubes.push cube
 
@@ -57,6 +65,24 @@ class UVMozaic extends BaseWorld
         rotate = -1 * rotation
       cube.userData = {rotate: rotate}
 #      cube.userData = {rotate: Math.random() * 0.2}
+
+  _createGeometry: (w, h, x, y)->
+    geometry = new THREE.BoxGeometry(CUBE_WIDTH, CUBE_WIDTH, CUBE_WIDTH)
+    for uv, j in geometry.faceVertexUvs[0]
+      if j % 2 == 0
+        newUV = [
+          new THREE.Vector2(0.0, 1.0),
+          new THREE.Vector2(0.0, 0.0),
+          new THREE.Vector2(1.0, 1.0)
+        ]
+      else
+        newUV = [
+          new THREE.Vector2(0.0, 0.0),
+          new THREE.Vector2(1.0, 0.0),
+          new THREE.Vector2(1.0, 1.0)
+        ]
+      geometry.faceVertexUvs[0][j] = newUV
+    return geometry
 
   _update: ->
     @_rotateCube()
