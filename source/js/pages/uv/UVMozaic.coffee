@@ -18,7 +18,6 @@ class UVMozaic extends BaseWorld
 
   _setup: ->
     @camera.position.set(0, 0, 50)
-    @camera.position.set(0, 0, 10)
     @_setupCubes()
     @_setupLight()
 
@@ -44,7 +43,7 @@ class UVMozaic extends BaseWorld
 
     @cubes = []
 
-    rotation = 0.015
+    rotation = 0.15
     w = 1.0 / COL
     h = 1.0 / ROW
 
@@ -68,18 +67,26 @@ class UVMozaic extends BaseWorld
 
   _createGeometry: (w, h, x, y)->
     geometry = new THREE.BoxGeometry(CUBE_WIDTH, CUBE_WIDTH, CUBE_WIDTH)
+#    x1 = 0.0
+#    x2 = 1.0
+#    y1 = 0.0
+#    y2 = 1.0
+    x1 = x * w
+    x2 = (x + 1) * w
+    y1 = y * h
+    y2 = (y + 1) * h
     for uv, j in geometry.faceVertexUvs[0]
       if j % 2 == 0
         newUV = [
-          new THREE.Vector2(0.0, 1.0),
-          new THREE.Vector2(0.0, 0.0),
-          new THREE.Vector2(1.0, 1.0)
+          new THREE.Vector2(x1, y2), # (0.0, 1.0)
+          new THREE.Vector2(x1, y1), # (0.0, 0.0)
+          new THREE.Vector2(x2, y2)  # (1.0, 1.0)
         ]
       else
         newUV = [
-          new THREE.Vector2(0.0, 0.0),
-          new THREE.Vector2(1.0, 0.0),
-          new THREE.Vector2(1.0, 1.0)
+          new THREE.Vector2(x1, y1), # (0.0, 0.0)
+          new THREE.Vector2(x2, y1), # (1.0, 0.0)
+          new THREE.Vector2(x2, y2)  # (1.0, 1.0)
         ]
       geometry.faceVertexUvs[0][j] = newUV
     return geometry
