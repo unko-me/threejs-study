@@ -97,12 +97,13 @@ class SphereTest
 #      map: THREE.ImageUtils.loadTexture('../../img/particle/gogogo.png')
 #      size: 80
 #      transparent: true
-#      depthTest: true
 #    })
 
-    @particle = new THREE.ParticleSystem(g, @particleMaterial)
+    @particle = new THREE.PointCloud(g, @particleMaterial)
 ##    //@particle.position = new Vector3(0, 0, 0)
     @particle.sortParticles = false
+    #transparentでやるときはsortParticles=trueに
+#    @particle.sortParticles = true
     @world.scene.add(@particle)
 
   _setupAxisHelper: ->
