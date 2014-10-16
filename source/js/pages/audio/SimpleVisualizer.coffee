@@ -4,6 +4,7 @@
 
 
 class SimpleVisualizer extends BaseWorld
+  ARRAY_SIZE = 256
   constructor: () ->
     super()
 
@@ -11,6 +12,8 @@ class SimpleVisualizer extends BaseWorld
   _setup: ->
 
     @_setupAudio()
+    @_setupAnalyser()
+    @_setupLine()
 
   _setupAudio: ->
     window.AudioContext =  window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext
@@ -40,11 +43,50 @@ class SimpleVisualizer extends BaseWorld
 #      osc.stop(0)
     )
 
+  _setupAnalyser: =>
+    @analyser = @context.createAnalyser()
+    @analyser.fftSize = 1024
+
+
   _playSound: =>
     source = @context.createBufferSource()
     source.buffer = @loader.buffer
+    source.playbackRate.value = 0.8
+    source.loop = true
+
+    if @analyser
+      source.connect @analyser
+
+
+#    lowpass = @context.createBiquadFilter()
+#    lowpass.type = 0
+#    lowpass.frequency.value = 800
+#    source.connect lowpass
+#    lowpass.connect @context.destination
+
+
     source.connect(@context.destination)
     source.start(0)
+
+
+  _setupLine: ->
+    @lineGeometry = new THREE.Geometry()
+    for i in [0...ARRAY_SIZE]
+      @lineGeometry.vertices.push new THREE.Vector3( i * 4, 0, 0)
+
+    line = new THREE.Line( @lineGeometry, new THREE.LineBasicMaterial( { color: 0x990000} ) )
+    @scene.add line
+
+  _update: ->
+    @_getData()
+
+  _getData: ->
+    data = new Uint8Array(ARRAY_SIZE)
+    @analyser.getByteFrequencyData(data)
+    for value, i in data
+      @lineGeometry.vertices[i].y = value * 4
+
+    @lineGeometry.verticesNeedUpdate = true
 
 
 if typeof define is "function" and define.amd
