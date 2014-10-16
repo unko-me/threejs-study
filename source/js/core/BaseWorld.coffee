@@ -21,6 +21,8 @@ class BaseWorld
     @setupControl()
     @_setup()
 
+  _setup: ->
+
 
   setupCamera: ->
     @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000)
@@ -48,7 +50,7 @@ class BaseWorld
 
   _setupClearColor: ->
     clearColor = @option?.clear?.color || 0
-    clearAlpha = @option?.clear?.alpha || 0
+    clearAlpha = @option?.clear?.alpha || 1
     @renderer.setClearColor(clearColor, clearAlpha)
 
 
