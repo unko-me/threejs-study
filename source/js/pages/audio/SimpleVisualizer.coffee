@@ -8,6 +8,7 @@ class SimpleVisualizer extends BaseWorld
   FFT_SIZE = 1024
 
   _isPlay: false
+  _mouseXFactor: 0.5
   constructor: () ->
     super()
 
@@ -21,11 +22,39 @@ class SimpleVisualizer extends BaseWorld
 
   _setup: ->
     y = 300
+#    @control.disableStopEvent = true
     @control.update()
     @camera.position.set(0, y, 800)
     @camera.lookAt(new THREE.Vector3(0, 300, 0))
     @_setupAudio()
     @_setupLine()
+    @_setupMouseMove()
+
+    if HandEvent.supportTouch
+      alert('タップすると音が出ます。')
+
+
+  _setupMouseMove: =>
+    if HandEvent.supportTouch
+      document.addEventListener(HandEvent.TOUCH_START, @_onMoveStart)
+      document.addEventListener(HandEvent.TOUCH_MOVE, @_onTouchMove, true)
+    else
+      document.addEventListener(HandEvent.TOUCH_MOVE, @_onMove)
+
+  _onMoveEnd: (e)=>
+#    document.removeEventListener(HandEvent.TOUCH_MOVE, @_onTouchMove)
+    document.removeEventListener(HandEvent.TOUCH_END, @_onMoveEnd)
+    document.addEventListener(HandEvent.TOUCH_START, @_onMoveStart)
+
+  _onMoveStart: (e)=>
+#    document.addEventListener(HandEvent.TOUCH_MOVE, @_onMove)
+    document.addEventListener(HandEvent.TOUCH_END, @_onMoveEnd)
+
+  _onTouchMove: (e)=>
+    @_mouseXFactor = e.touches[0].pageX / window.innerWidth
+
+  _onMove: (e)=>
+    @_mouseXFactor = e.clientX / window.innerWidth
 
   _setupAudio: ->
     @player = new SimpleAudioPlayer()
@@ -85,15 +114,20 @@ class SimpleVisualizer extends BaseWorld
     @scene.add @particle
 
   _update: ->
-    if @player._isPlay
+    if @player.isPlay
       data = @_getData()
       @_renderLine(data)
+
+      if @player.source?
+        @player.source.playbackRate.value = @_mouseXFactor * 1 + 0.5
 
     @camera.lookAt(new THREE.Vector3(0, 300, 0))
 
     rotate = -0.003
     @line.rotation.y += rotate
     @particle.rotation.y += rotate
+
+
 
 
   _getData: ->

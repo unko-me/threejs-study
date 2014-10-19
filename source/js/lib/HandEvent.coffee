@@ -1,10 +1,10 @@
 HandEvent = {}
 do ->
 
-  supportTouch = ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch
+  HandEvent.supportTouch = ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch
   HandEvent.click = 'click'
 
-  if supportTouch
+  if HandEvent.supportTouch
     HandEvent.TOUCH_START = 'touchstart'
     HandEvent.TOUCH_MOVE = 'touchmove'
     HandEvent.TOUCH_END = 'touchend'
@@ -12,6 +12,8 @@ do ->
     HandEvent.TOUCH_START = 'mousedown'
     HandEvent.TOUCH_MOVE = 'mousemove'
     HandEvent.TOUCH_END = 'mouseup'
+
+
 
 
 if typeof define is "function" and define.amd
