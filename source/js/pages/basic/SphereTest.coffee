@@ -86,7 +86,7 @@ class SphereTest
       zz = Math.random() * 1000 - 500
       g.vertices.push(new THREE.Vector3(xx,yy,zz))
 
-    @particleMaterial = new THREE.ParticleBasicMaterial( {
+    @particleMaterial = new THREE.PointCloudMaterial( {
       map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
       size: 80
 #      size: 2, color: 0xffffffff,transparent: true, depthTest: true, alpha:1

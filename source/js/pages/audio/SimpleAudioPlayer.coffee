@@ -7,6 +7,13 @@ class SimpleAudioPlayer
 
   constructor: () ->
 
+  Object.defineProperties @prototype,
+    isPlay:
+      get: ->
+        @_isPlay
+
+
+
 
   setup: (src, fftSize)=>
     window.AudioContext =  window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext
