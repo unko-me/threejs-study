@@ -4,7 +4,9 @@
 
 
 class SimpleVisualizer extends BaseWorld
-  ARRAY_SIZE = 256
+  ARRAY_SIZE = 512
+
+  _isPlay: false
   constructor: () ->
     super()
 
@@ -29,14 +31,14 @@ class SimpleVisualizer extends BaseWorld
 
     @loader = new AudioLoader('../../sound/hakatanosio.mp3', (buffer)=>
       console.log 'end', buffer
-      @_playSound()
+      @togglePlay()
     )
 
     $(document).on(HandEvent.TOUCH_START, =>
 #      osc.start(0)
       console.log '@loader.buffer:', @loader.buffer
-      if @loader.buffer
-        @_playSound()
+      if @loader.audioBuffer
+        @togglePlay()
     )
 
     $(document).on(HandEvent.TOUCH_END, =>
@@ -45,33 +47,49 @@ class SimpleVisualizer extends BaseWorld
 
   _setupAnalyser: =>
     @analyser = @context.createAnalyser()
-    @analyser.fftSize = 1024
+    @analyser.fftSize = ARRAY_SIZE * 2
+
+
+  togglePlay: =>
+    if @_isPlay
+      @_stopSound()
+    else
+      @_playSound()
+
+    @_isPlay = !@_isPlay
+
+  _stopSound: =>
+    if @source
+      @source.stop()
+
+    @source = null
+
 
 
   _playSound: =>
     source = @context.createBufferSource()
-    source.buffer = @loader.buffer
-    source.playbackRate.value = 0.8
+    source.buffer = @loader.audioBuffer
+    source.playbackRate.value = 1
     source.loop = true
 
     if @analyser
       source.connect @analyser
 
 
-#    lowpass = @context.createBiquadFilter()
-#    lowpass.type = 0
-#    lowpass.frequency.value = 800
-#    source.connect lowpass
-#    lowpass.connect @context.destination
+    lowpass = @context.createBiquadFilter()
+    lowpass.type = 2
+    lowpass.frequency.value = 12800
+    source.connect lowpass
+    lowpass.connect @context.destination
 
-
-    source.connect(@context.destination)
+#    source.connect(@context.destination)
     source.start(0)
+    @source = source
 
 
   _setupLine: ->
     @lineGeometry = new THREE.Geometry()
-    for i in [0...ARRAY_SIZE]
+    for i in [0...ARRAY_SIZE  / 2]
       @lineGeometry.vertices.push new THREE.Vector3( i * 4, 0, 0)
 
     line = new THREE.Line( @lineGeometry, new THREE.LineBasicMaterial( { color: 0x990000} ) )
@@ -81,7 +99,7 @@ class SimpleVisualizer extends BaseWorld
     @_getData()
 
   _getData: ->
-    data = new Uint8Array(ARRAY_SIZE)
+    data = new Uint8Array(@analyser.frequencyBinCount / 2)
     @analyser.getByteFrequencyData(data)
     for value, i in data
       @lineGeometry.vertices[i].y = value * 4
@@ -90,13 +108,10 @@ class SimpleVisualizer extends BaseWorld
 
 
 if typeof define is "function" and define.amd
-  # AMD. Register as an anonymous module.
   define ->
     SimpleVisualizer
 else if typeof exports is "object"
-  # CommonJS
   exports.SimpleVisualizer = SimpleVisualizer
 else
-  # Browser global.
   window.SimpleVisualizer = SimpleVisualizer
 

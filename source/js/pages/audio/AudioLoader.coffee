@@ -9,9 +9,9 @@ class AudioLoader
 
 
     request = new XMLHttpRequest()
+    request.open 'GET', url, true
     request.responseType = 'arraybuffer'
     request.onload = @_onLoad
-    request.open 'GET', url, true
     request.send()
 
 
@@ -20,10 +20,10 @@ class AudioLoader
     @convert()
 
   convert: ()->
-    @_context.decodeAudioData(@arrayBuffer, (buffer)=>
-      @buffer = buffer
+    @_context.decodeAudioData(@arrayBuffer, (audioBuffer)=>
+      @audioBuffer = audioBuffer
       console.log 'buffer end'
-      @_success?(buffer)
+      @_success?(audioBuffer)
       @_success = null
       @_error = null
     )
