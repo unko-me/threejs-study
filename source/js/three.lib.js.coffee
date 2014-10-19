@@ -1,3 +1,4 @@
+#= require ./lib/UA
 #= require 'lib/modernizr.custom.webgl.js'
 #= require 'jquery/dist/jquery.min.js'
 #= require 'lodash/dist/lodash.min.js'

@@ -30,8 +30,8 @@ class SimpleVisualizer extends BaseWorld
     @_setupLine()
     @_setupMouseMove()
 
-    if HandEvent.supportTouch
-      alert('タップすると音が出ます。')
+#    if HandEvent.supportTouch
+#      alert('タップすると音が出ます。')
 
 
   _setupMouseMove: =>
@@ -58,6 +58,10 @@ class SimpleVisualizer extends BaseWorld
 
   _setupAudio: ->
     @player = new SimpleAudioPlayer()
+    @player.on('load', =>
+      unless HandEvent.supportTouch
+        @togglePlay()
+    )
     @player.setup('../../sound/hakatanosio.mp3', FFT_SIZE)
 
     @context = @player.context

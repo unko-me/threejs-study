@@ -1,4 +1,4 @@
-class SimpleAudioPlayer
+class SimpleAudioPlayer extends EventEmitter2
   ARRAY_SIZE = 0
 
   _isPlay: false
@@ -27,7 +27,7 @@ class SimpleAudioPlayer
   _load: (src)->
     @loader = new AudioLoader(src, (buffer)=>
       console.log 'end', buffer
-      @togglePlay()
+      @emit('load')
     )
 
 

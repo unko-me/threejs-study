@@ -19,10 +19,14 @@ class BaseWorld
     @setupRenderer()
     @setupLights()
     @setupControl()
+    @initNotify()
     @_setup()
 
   _setup: ->
 
+
+  initNotify: ->
+    $('.notify').delay(2000).fadeOut(1000)
 
   setupCamera: ->
     @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000)
