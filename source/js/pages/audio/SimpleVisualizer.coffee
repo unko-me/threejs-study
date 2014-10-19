@@ -1,10 +1,11 @@
 #= require StatsInit
 #= require core/BaseWorld
 #= require ./AudioLoader
+#= require ./SimpleAudioPlayer
 
 
 class SimpleVisualizer extends BaseWorld
-  ARRAY_SIZE = 512
+  FFT_SIZE = 1024
 
   _isPlay: false
   constructor: () ->
@@ -14,30 +15,18 @@ class SimpleVisualizer extends BaseWorld
   _setup: ->
 
     @_setupAudio()
-    @_setupAnalyser()
     @_setupLine()
 
   _setupAudio: ->
-    window.AudioContext =  window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.msAudioContext
-    @context = new AudioContext()
+    @player = new SimpleAudioPlayer()
+    @player.setup('../../sound/hakatanosio.mp3', FFT_SIZE)
 
-    osc = @context.createOscillator()
+    @context = @player.context
 
-    gainNode = @context.createGain()
-    gainNode.gain.value = 0.5
-    osc.connect(gainNode)
-    gainNode.connect(@context.destination)
-
-
-    @loader = new AudioLoader('../../sound/hakatanosio.mp3', (buffer)=>
-      console.log 'end', buffer
-      @togglePlay()
-    )
 
     $(document).on(HandEvent.TOUCH_START, =>
 #      osc.start(0)
-      console.log '@loader.buffer:', @loader.buffer
-      if @loader.audioBuffer
+      if @player.loader.audioBuffer
         @togglePlay()
     )
 
@@ -45,51 +34,15 @@ class SimpleVisualizer extends BaseWorld
 #      osc.stop(0)
     )
 
-  _setupAnalyser: =>
-    @analyser = @context.createAnalyser()
-    @analyser.fftSize = ARRAY_SIZE * 2
-
 
   togglePlay: =>
-    if @_isPlay
-      @_stopSound()
-    else
-      @_playSound()
+    @player.togglePlay()
 
-    @_isPlay = !@_isPlay
-
-  _stopSound: =>
-    if @source
-      @source.stop()
-
-    @source = null
-
-
-
-  _playSound: =>
-    source = @context.createBufferSource()
-    source.buffer = @loader.audioBuffer
-    source.playbackRate.value = 1
-    source.loop = true
-
-    if @analyser
-      source.connect @analyser
-
-
-    lowpass = @context.createBiquadFilter()
-    lowpass.type = 2
-    lowpass.frequency.value = 12800
-    source.connect lowpass
-    lowpass.connect @context.destination
-
-#    source.connect(@context.destination)
-    source.start(0)
-    @source = source
 
 
   _setupLine: ->
     @lineGeometry = new THREE.Geometry()
-    for i in [0...ARRAY_SIZE  / 2]
+    for i in [0...FFT_SIZE  / 4]
       @lineGeometry.vertices.push new THREE.Vector3( i * 4, 0, 0)
 
     line = new THREE.Line( @lineGeometry, new THREE.LineBasicMaterial( { color: 0x990000} ) )
@@ -99,8 +52,11 @@ class SimpleVisualizer extends BaseWorld
     @_getData()
 
   _getData: ->
-    data = new Uint8Array(@analyser.frequencyBinCount / 2)
-    @analyser.getByteFrequencyData(data)
+    analyser = @player.analyser
+    unless analyser
+      return
+    data = new Uint8Array(analyser.frequencyBinCount / 2)
+    analyser.getByteFrequencyData(data)
     for value, i in data
       @lineGeometry.vertices[i].y = value * 4
 
