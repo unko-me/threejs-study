@@ -11,13 +11,19 @@ class SimpleVisualizer extends BaseWorld
   constructor: () ->
     super()
 
-  setupControl: ->
+#  setupControl: ->
+#    @control = new THREE.OrbitControls(@camera, @render.domElement)
+#    @control = new THREE.FlyControls(@camera, @render.domElement)
+#    @control.dragToLook = true;
+#    @control.movementSpeed = 5;
+#    @control.rollSpeed = 0.5;
 
 
   _setup: ->
     y = 300
-    @camera.position.set(0, y, 500)
-    @camera.lookAt(new THREE.Vector3(0, y, 0))
+    @control.update()
+    @camera.position.set(0, y, 800)
+    @camera.lookAt(new THREE.Vector3(0, 300, 0))
     @_setupAudio()
     @_setupLine()
 
@@ -60,8 +66,8 @@ class SimpleVisualizer extends BaseWorld
     @lineGeometry.colors = colors
 
     material = new THREE.LineBasicMaterial( { color: 0xffffff, opacity: 1, linewidth: 1, vertexColors: THREE.VertexColors } )
-    line = new THREE.Line( @lineGeometry, material )
-    @scene.add line
+    @line = new THREE.Line( @lineGeometry, material )
+    @scene.add @line
 
     @_addPoint()
 
@@ -69,6 +75,8 @@ class SimpleVisualizer extends BaseWorld
     @particleMaterial = new THREE.PointCloudMaterial( {
 #      size: 10, color: 0xffffffff, transparent: true, depthTest: true, alpha:1
       map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
+      transparent: true
+      blending: THREE.AdditiveBlending
       size: 30
     })
     @particleGeo = @lineGeometry.clone()
@@ -81,6 +89,13 @@ class SimpleVisualizer extends BaseWorld
       data = @_getData()
       @_renderLine(data)
 
+    @camera.lookAt(new THREE.Vector3(0, 300, 0))
+
+    rotate = -0.003
+    @line.rotation.y += rotate
+    @particle.rotation.y += rotate
+
+
   _getData: ->
     analyser = @player.analyser
     unless analyser
@@ -90,7 +105,7 @@ class SimpleVisualizer extends BaseWorld
     return data
 
   _renderLine: (data)->
-    h = 3
+    h = 5
     sum = 0
     for value, i in data
       @lineGeometry.vertices[i].y = value * h
@@ -99,7 +114,9 @@ class SimpleVisualizer extends BaseWorld
 
     @lineGeometry.verticesNeedUpdate = true
     @particleGeo.verticesNeedUpdate = true
-    @particleMaterial.size = sum / data.length
+
+    # particle size
+    @particleMaterial.size = sum / data.length * 0.3
 
 
 

@@ -74,7 +74,7 @@ class SimpleAudioPlayer
 
   stop: =>
     if @source
-      @source.stop()
+      @source.stop(0)
 
     @source = null
 

@@ -71,7 +71,7 @@ class BaseWorld
 
 
   setupControl: ->
-    @control = new THREE.TrackballControls(@camera)
+    @control = new THREE.TrackballControls(@camera, @renderer.domElement)
 
 
   onWindowResize: =>
