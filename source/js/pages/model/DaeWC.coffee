@@ -17,14 +17,16 @@ class DaeWC extends BaseWorld
     @_loadModel()
     @_addLight()
     @_addParticle()
+    @_addPMizuno()
     @_startParticle()
 
 
   _addLight: ->
 
 
-    @camera.position.x = 0
-    @camera.position.y -=400
+    @camera.position.x = -200
+    @camera.position.y = 430
+    @camera.position.z = -200
 #    @renderer.shadowMapEnabled = true
 #    @_directionalLight.caastShadow = true
 
@@ -122,9 +124,50 @@ class DaeWC extends BaseWorld
         z: Math.random() * 100 - 50 + 200
         ease: 'easeInQuint', delay: 0.01 * i, repeat: -1})
 
+  _addPMizuno: ->
+    @_data = {x: 62, y: 542, z: 115, rotationX: -40, rotationY: 0, rotationZ: 0}
+
+    geo = new THREE.PlaneGeometry(100, 100, 10, 10)
+    material = new THREE.MeshBasicMaterial(
+      map: THREE.ImageUtils.loadTexture('../../img/particle/drops-assets/mizuno.png')
+      side: THREE.DoubleSide
+    )
+    @mizuno = new THREE.Mesh(geo, material)
+
+
+    scale = 4
+    @mizuno.scale.set(scale, scale, scale)
+
+    @_updateMizunoPos()
+
+    @scene.add @mizuno
+
+    @_setupGUI()
+
+
+  _updateMizunoPos: =>
+    @mizuno.position.set(@_data.x, @_data.y, @_data.z)
+    @mizuno.rotation.x = @_data.rotationX * Math.PI / 180
+    @mizuno.rotation.y = @_data.rotationY * Math.PI / 180
+    @mizuno.rotation.z = @_data.rotationZ * Math.PI / 180
+
+  _setupGUI: ->
+    gui = new dat.GUI()
+    gui.add @_data, 'x', -1000, 1000
+    gui.add @_data, 'y', 1, 1000
+    gui.add @_data, 'z', -100, 1000
+    gui.add @_data, 'rotationX', 0, 360
+    gui.add @_data, 'rotationY', 0, 360
+    gui.add @_data, 'rotationZ', 0, 360
+
+
+
+
+
   _update: ->
     @particleGeo.verticesNeedUpdate = true
-
+    @_updateMizunoPos()
+    @camera.lookAt(@mizuno.position)
 
 
 if typeof define is "function" and define.amd
