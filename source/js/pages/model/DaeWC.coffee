@@ -136,9 +136,9 @@ class DaeWC extends BaseWorld
 
   _rotateNext: =>
     TweenMax.to(@camera.position, 1.0,
-      x: -200,
-      y: -10,
-      z: -130,
+      x: -550,
+      y: -20,
+      z: -150,
       delay: 3.0
       ease: 'easeInOutQuint'
     )
@@ -172,7 +172,8 @@ class DaeWC extends BaseWorld
 
     @control.target = @mizuno.position
 
-    @_setupGUI()
+    if __debug
+      @_setupGUI()
 
 
   _updateMizunoPos: =>
