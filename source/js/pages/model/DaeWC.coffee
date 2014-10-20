@@ -18,7 +18,8 @@ class DaeWC extends BaseWorld
     @_addLight()
     @_addParticle()
     @_addPMizuno()
-    @_startParticle()
+    @_start()
+
 
 
   _addLight: ->
@@ -27,7 +28,10 @@ class DaeWC extends BaseWorld
     @camera.position.x = -200
     @camera.position.y = 430
     @camera.position.z = -200
-#    @renderer.shadowMapEnabled = true
+#    @camera.position.x = 100
+    @camera.position.y = 830
+    @camera.position.z = 300
+    #    @renderer.shadowMapEnabled = true
 #    @_directionalLight.caastShadow = true
 
     spotLight = new THREE.SpotLight(0xffffff, 0.5, 0, Math.PI / 6 , 10)
@@ -116,6 +120,29 @@ class DaeWC extends BaseWorld
 #    @particle.sortParticles = true
     @scene.add @particle
 
+
+
+  _start: ()=>
+    TweenMax.to(@camera.position, 1.0, {
+      x: 100,
+      y: @camera.position.y - 50,
+      z: @camera.position.z - 5,
+      delay: 1.6
+      ease: 'easeInOutQuint'
+      onComplete: =>
+        @_startParticle()
+        @_rotateNext()
+    })
+
+  _rotateNext: =>
+    TweenMax.to(@camera.position, 1.0,
+      x: -200,
+      y: -10,
+      z: -130,
+      delay: 3.0
+      ease: 'easeInOutQuint'
+    )
+
   _startParticle: ->
     for point, i in @particleGeo.vertices
       TweenMax.to(point, 1.0, {
@@ -125,22 +152,25 @@ class DaeWC extends BaseWorld
         ease: 'easeInQuint', delay: 0.01 * i, repeat: -1})
 
   _addPMizuno: ->
-    @_data = {x: 62, y: 542, z: 115, rotationX: -40, rotationY: 0, rotationZ: 0}
+    @_data = {x: 106, y: 542, z: 115, rotationX: -40, rotationY: 0, rotationZ: 0}
 
-    geo = new THREE.PlaneGeometry(100, 100, 10, 10)
+    geo = new THREE.PlaneGeometry(301, 218, 10, 10)
     material = new THREE.MeshBasicMaterial(
       map: THREE.ImageUtils.loadTexture('../../img/particle/drops-assets/mizuno.png')
       side: THREE.DoubleSide
+#      transparent: true
     )
     @mizuno = new THREE.Mesh(geo, material)
 
 
-    scale = 4
+    scale = 2
     @mizuno.scale.set(scale, scale, scale)
 
     @_updateMizunoPos()
 
     @scene.add @mizuno
+
+    @control.target = @mizuno.position
 
     @_setupGUI()
 
@@ -167,7 +197,7 @@ class DaeWC extends BaseWorld
   _update: ->
     @particleGeo.verticesNeedUpdate = true
     @_updateMizunoPos()
-    @camera.lookAt(@mizuno.position)
+#    @camera.lookAt(@mizuno.position)
 
 
 if typeof define is "function" and define.amd
