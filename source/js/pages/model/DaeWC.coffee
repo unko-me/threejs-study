@@ -98,11 +98,11 @@ class DaeWC extends BaseWorld
   _addParticle: ->
     @particleMaterial = new THREE.PointCloudMaterial( {
 #      size: 10, color: 0xffffffff, transparent: true, depthTest: true, alpha:1
-#      map: THREE.ImageUtils.loadTexture('../../img/katapad/yes_02.png')
+      map: THREE.ImageUtils.loadTexture('../../img/particle/drops-assets/drops.png')
       transparent: true
       blending: THREE.AdditiveBlending
-      color: 0x333399ff
-      size: 30
+#      color: 0x333399ff
+      size: 20
     })
     @particleGeo = new THREE.Geometry()
     for i in [0...NUM_PARTICLE]
@@ -111,7 +111,7 @@ class DaeWC extends BaseWorld
 
 
     @particle = new THREE.PointCloud(@particleGeo, @particleMaterial)
-    @particle.sortParticles = false
+#    @particle.sortParticles = true
     @scene.add @particle
 
   _startParticle: ->
