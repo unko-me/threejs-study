@@ -3,9 +3,9 @@ url: &url
 title: &title
   'Three.jsのお勉強をしています。'
 description: &description
-  'Three.jsで極めてまじめに勉強したものを習作としておサーバーにアップしています'
+  '@katapadがThree.jsで極めてまじめに勉強したものを習作としておサーバーにアップしています'
 keywords: &keywords
-  'My Site keywords,keyword'
+  '地獄'
 
 twitter:
   lang: 'ja'
