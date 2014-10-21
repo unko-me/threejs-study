@@ -29,7 +29,7 @@ class BaseWorld
     $('.notify').delay(2000).fadeOut(1000)
 
   setupCamera: ->
-    @camera = new THREE.PerspectiveCamera(75, 600 / 400, 1, 5000)
+    @camera = new THREE.PerspectiveCamera(75, 600 / 400, .1, 5000)
     @_setupCameraPos()
     @_setupCameraLookAt()
 
