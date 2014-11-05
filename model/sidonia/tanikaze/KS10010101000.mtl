@@ -1,0 +1,115 @@
+newmtl badgeSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl eyeLSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl eyeLenzSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 0.10 0.10 0.10
+Ni 1.00
+newmtl eyePartsSG
+illum 4
+Kd 0.11 0.11 0.13
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl eyeRSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl hairSG
+illum 4
+Kd 0.11 0.11 0.13
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl highlightSG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert5SG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert6SG
+illum 4
+Kd 0.97 0.87 0.75
+Ka 0.15 0.15 0.15
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_belt_mt_sg
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_boots_mt_sg
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_buckle_mt_sg
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_line_mt_sg
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_metalParts_mt_sg
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl nagateUniform_mt_sg
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl oralCavity_mt_sg
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+newmtl teethSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl tongueSG
+illum 4
+Kd 0.82 0.52 0.47
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl unitColor_lambartSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.30 0.30 0.30
+Tf 1.00 1.00 1.00
+Ni 1.00

@@ -1,0 +1,20 @@
+マテリアル/テクスチャ対照表
+
+商品名:
+谷風長道　制服バージョン（訓練生）
+
+fbx/objファイル名:
+KS10010101000.fbx
+KS10010101000.obj
+
+マテリアル名:テクスチャ名
+badgeLambert:badge.0001.jpg
+eyeLLambert:nagateHero_eye_c_1k_L.jpg
+eyeRLambert:nagateHero_eye_c_1k_R.jpg
+nagateUniform_boots_mt_lambert:nagateUniform_boots_c_4k.jpg
+nagateUniform_buckle_mt_lambert:buckle.tif
+nagateUniform_mt_lambert:nagateUniform_c_4k.jpg
+oralCavity_mt_blinn:oral_c_1k.tif
+safety:safetyBeltColor.tif
+teethLambert:oral_c_1k.tif
+unitColor_lambart:unitRed.tif

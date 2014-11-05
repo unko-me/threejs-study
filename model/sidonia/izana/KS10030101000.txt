@@ -1,0 +1,21 @@
+マテリアル/テクスチャ対照表
+
+商品名:
+科戸瀬イザナ 制服バージョン（訓練生）
+
+fbx/objファイル名:
+KS10030101000.fbx
+KS10030101000.obj
+
+マテリアル名:テクスチャ名
+buckleLambert:buckle.tif
+badgeLambert: badge.0002.jpg
+bootsLambert: izanarUniform_boots_c_4k.tif
+eyeLLambert: izanaHero_eyeL_c_1k.tif
+eyeRLambert: izanaHero_eyeR_c_1k.tif
+oral:oral_c_1k.tif
+safety:safetyBeltColor.tif
+teethLambert:oral_c_1k.jpg
+uniformLambert: izanarUniform_c_4k.tif
+
+
