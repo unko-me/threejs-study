@@ -96,7 +96,7 @@ configure :build do
   # activate :smusher
 
   # Or use a different image path
-  set :http_path, "/three-study/img/"
+  set :http_path, "/three-study/"
 end
 
 # Deploy-specific configuration
