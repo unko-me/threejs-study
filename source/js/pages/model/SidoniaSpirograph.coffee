@@ -5,7 +5,7 @@
 #= require lib/three/loaders/OBJMTLLoader
 #= require lib/three/loaders/OBJLoader
 
-class Sidonia extends BaseWorld
+class SidoniaSpirograph extends BaseWorld
 
   __debug = true
 
@@ -18,7 +18,15 @@ class Sidonia extends BaseWorld
   _setup: ->
     @_loadModel()
     @_addLight()
+    @_data =
+      p1r: 1
+      p2r: 1
+    @_setupGUI()
 
+  _setupGUI: ->
+    gui = new dat.GUI()
+    gui.add @_data, 'p1r', 1, 100
+    gui.add @_data, 'p2r', 0, 100
 
 
   _addLight: ->
@@ -60,15 +68,6 @@ class Sidonia extends BaseWorld
     @_loadModelObj('../../model/sidonia/tanikaze/KS10010101000', (obj)=>
       @tanikaze = obj
     )
-#    @_loadModelObj('../../model/sidonia/izana/KS10030101000', (obj)=>
-#      obj.position.x = 300
-#      @izana = obj
-#    )
-#
-#    @_loadModelObj('../../model/sidonia/hoshijiro/KS10020101000', (obj)=>
-#      obj.position.x = -300
-#      @hoshijiro = obj
-#    )
 
   _loadModelObj: (path, onLoad)->
     loader = new THREE.OBJMTLLoader()
@@ -80,35 +79,16 @@ class Sidonia extends BaseWorld
       onLoad?(object)
     )
 
-
-
-
-
-
-  _amp1: 0
-  _amp2: 0
   _update: ->
-#    @camera.lookAt(@mizuno.position)
-#    if @tanikaze
-#      @tanikaze.rotation.x += 0.2
-#      @tanikaze.scale.y = Math.sin(@_amp1 += 0.01) * 20
-#      for mesh in @tanikaze.children
-#        mesh.rotation.y += 0.2 * Math.random()
-    if @hoshijiro
-      @hoshijiro.rotation.y += 0.2
-
-    if @izana
-      @izana.rotation.z += Math.sin(@_amp1 += 0.01)
-      @izana.rotation.x += Math.sin(@_amp2 += 0.02) * 0.3
 
 
 if typeof define is "function" and define.amd
   # AMD. Register as an anonymous module.
   define ->
-    Sidonia
+    SidoniaSpirograph
 else if typeof exports is "object"
   # CommonJS
-  exports.Sidonia = Sidonia
+  exports.SidoniaSpirograph = SidoniaSpirograph
 else
   # Browser global.
-  window.Sidonia = Sidonia
+  window.SidoniaSpirograph = SidoniaSpirograph
