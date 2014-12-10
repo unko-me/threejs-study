@@ -17,16 +17,15 @@
 
 # Slim settings
 # Set slim-lang output style
-Slim::Engine.set_default_options :pretty => true
+Slim::Engine.set_options :pretty => true
 # Set Shortcut
-Slim::Engine.set_default_options :shortcut => {
+Slim::Engine.set_options :shortcut => {
   '#' => {:tag => 'div', :attr => 'id'},
   '.' => {:tag => 'div', :attr => 'class'},
   '&' => {:tag => 'input', :attr => 'type'}
 }
 
 # bower.js settings
-# set :bower_dir, '../vendor/bower'
 ready do
   sprockets.append_path File.join root.to_s, "bower_components"
   # sprockets.append_path "#{root}/bower_components"
