@@ -25,12 +25,30 @@ Slim::Engine.set_options :shortcut => {
   '&' => {:tag => 'input', :attr => 'type'}
 }
 
-# system 'open -a "Google Chrome Canary" http://localhost:4567/'
+
+def my_address
+  udp = UDPSocket.new
+  # クラスBの先頭アドレス,echoポート 実際にはパケットは送信されない。
+  udp.connect("128.0.0.0", 7)
+  adrs = Socket.unpack_sockaddr_in(udp.getsockname)[1]
+  udp.close
+  adrs
+end
+
 
 # bower.js settings
 ready do
   sprockets.append_path File.join root.to_s, "bower_components"
   # sprockets.append_path "#{root}/bower_components"
+
+
+  # open
+  url = "http://#{my_address}:4567/"
+  command = "open -a \"Google Chrome Canary\" #{url}"
+  puts "url: #{url}"
+  puts "command: #{command}"
+
+  system command
 end
 
 # activate :directory_indexes

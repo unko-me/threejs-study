@@ -30,7 +30,7 @@ GEM
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     execjs (2.2.2)
     ffi (1.9.6)
     haml (4.0.6)
@@ -74,9 +74,9 @@ GEM
       middleman-core (>= 3.2)
       net-sftp
       ptools
-    middleman-livereload (3.3.4)
+    middleman-livereload (3.4.2)
       em-websocket (~> 0.5.1)
-      middleman-core (~> 3.2)
+      middleman-core (>= 3.3)
       rack-livereload (~> 0.3.15)
     middleman-sprockets (3.3.10)
       middleman-core (~> 3.3)
@@ -138,6 +138,6 @@ PLATFORMS
 DEPENDENCIES
   middleman (= 3.3.7)
   middleman-deploy (= 1.0.0)
-  middleman-livereload (= 3.3.4)
+  middleman-livereload (= 3.4.2)
   oily_png
   slim (= 3.0.0)
