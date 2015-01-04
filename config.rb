@@ -51,6 +51,10 @@ ready do
   system command
 end
 
+
+# ignore IDEA Files at LiveReload
+file_watcher_ignore.push /^.idea\//
+
 # activate :directory_indexes
 #
 # activate :gzip
