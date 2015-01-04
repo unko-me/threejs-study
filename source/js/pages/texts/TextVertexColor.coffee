@@ -1,31 +1,43 @@
-#= require StatsInit
+#= re quire StatsInit
 #= require core/BaseWorld
 
 
 class TextVertexColor extends BaseWorld
   constructor: () ->
     super(
+      rendererParams:
+        preserveDrawingBuffer: true
       amibientLight:
         color: 0x333333
+      clear:
+        color: 0x000000
+        alpha: 0.9
     )
 
 
   _setupCameraPos: ->
     @camera.position.set(0, 0, 300)
+
+
   _setup: ->
 #    @_setupGround()
     @_setupText()
 
-
+    @_click = true
+    $(window).on('click',=>
+      @_click = !@_click
+    )
 
 
   _setupText: ->
     theText = 'SENSORS'
     theText = 'セ・リーグ'
+    theText = '東京都足立区'
     textGeometry = new THREE.TextGeometry(theText,
       size: 80
       height: 0
       curveSegments: 1
+#      bevelEnabled: true
 #      font: "helvetiker"
       font: "pixelmplus12"
     )
@@ -43,6 +55,7 @@ class TextVertexColor extends BaseWorld
       color: 0xffffff
       shading: THREE.FlatShading
       vertexColors: THREE.VertexColors
+#      wireframe: true
     )
     @textMaterial = textMaterial
     @_setVertexColor()
@@ -73,9 +86,10 @@ class TextVertexColor extends BaseWorld
 #        vertexIndex = face[ faceIndices[ j ] ]
 #        p = geometry.vertices[ vertexIndex ]
         color = new THREE.Color( 0 )
-        if(Math.random()<0.5)
-          color.setHSL( Math.random(), 1.0, 0.5 );
-#          color.setHSL( Math.random(), 0.4, 0.5 );
+#        if(Math.random()<0.5)
+        color.setHSL( Math.random() * 0.1 + @_offset , Math.random() * 0.1 + 0.9, Math.random() * 0.5 + 0.3 );
+#        color.setHSL( Math.random() * 0.2 + 0.8, 1, 0.8 );
+#        color.setHSL( Math.random(), 0.4, 0.5 );
 
         face.vertexColors[ j ] = color
 
@@ -90,7 +104,13 @@ class TextVertexColor extends BaseWorld
 
     mesh.rotation.x = -90 * Math.PI / 180
 
+  _offset: Math.random()
   _update: ->
+
+    if @_click
+      @_offset += 0.05
+      @_offset = 0 if @_offset > 1
+
     if @_yuragi > 0.1
       @_yuragi += (0 - @_yuragi) * 0.039
 #      @_yuragi -= 0.1

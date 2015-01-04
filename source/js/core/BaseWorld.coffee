@@ -6,9 +6,21 @@ class BaseWorld
 
   ###*
   option
+  option.rendererParams : new WebGLRenderer(rendererParams)
   option.clear
   option.clear.alpha
   option.clear.color
+
+  ## example
+  super(
+      rendererParams:
+        preserveDrawingBuffer: true
+      amibientLight:
+        color: 0x333333
+      clear:
+        color: 0x000000
+        alpha: 0.9
+    )
   ###
   constructor: (@option) ->
     @scene = new THREE.Scene()
@@ -42,7 +54,7 @@ class BaseWorld
   setupRenderer: ->
 #    if (CanvasDetector.canWebGL())
     if (Modernizr.webgl)
-      @renderer = new THREE.WebGLRenderer()
+      @renderer = new THREE.WebGLRenderer(@option?.rendererParams)
     else
       @renderer = new THREE.CanvasRenderer()
 
@@ -56,7 +68,7 @@ class BaseWorld
     clearColor = @option?.clear?.color || 0
     clearAlpha = @option?.clear?.alpha || 1
     @renderer.setClearColor(clearColor, clearAlpha)
-
+    @renderer.autoClearColor = false
 
   setupLights: ->
     @_setupDirectionalLight()

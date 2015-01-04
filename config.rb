@@ -25,6 +25,8 @@ Slim::Engine.set_options :shortcut => {
   '&' => {:tag => 'input', :attr => 'type'}
 }
 
+# system 'open -a "Google Chrome Canary" http://localhost:4567/'
+
 # bower.js settings
 ready do
   sprockets.append_path File.join root.to_s, "bower_components"
@@ -96,33 +98,11 @@ configure :build do
 
   # Or use a different image path
   set :http_path, "/three-study/"
+
 end
 
 # Deploy-specific configuration
 activate :deploy do |deploy|
-  deploy.build_before = true # default: false
-
-  # git
+  deploy.build_before = true
   deploy.method = :git
-  # Optional Settings
-  # deploy.remote = "custom-remote" # remote name or git url, default: origin
-  # deploy.branch = "custom-branch" # default: gh-pages
-
-  # ftp
-  # deploy.method   = :ftp
-  # deploy.host     = "ftp.example.com"
-  # deploy.user     = "tvaughan"
-  # deploy.password = "secret"
-  # deploy.path     = "/srv/www/site"
-
-  # sftp
-  # require 'json'
-  # json = JSON.load(File.read('.ftppass'))
-  # ftp = json['test']
-  #
-  # deploy.method   = :sftp
-  # deploy.host     = ftp['host']
-  # deploy.user     = ftp['user']
-  # deploy.password = ftp['password']
-  # deploy.path     = ftp['remotePathi']
 end

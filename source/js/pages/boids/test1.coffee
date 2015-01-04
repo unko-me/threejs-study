@@ -59,7 +59,6 @@ class Flag1
       plane.position.x = boid[0]
       plane.position.y = boid[1]
 
-
   _setupGUI: ->
     gui = new dat.GUI()
     @_data = new TestData()
