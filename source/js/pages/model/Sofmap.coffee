@@ -10,7 +10,7 @@ class Sofmap extends THREE.Object3D
   _init: ->
     GEO_W = 400
     GEO_H = 212 * 2
-    geometry = new THREE.PlaneGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
+    geometry = new THREE.PlaneBufferGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
 
 #    texture = THREE.ImageUtils.loadTexture('../../img/sofmap/sofmap-assets/sofmap_texture.png')
     texture = THREE.ImageUtils.loadTexture('../../img/sofmap/sofmap-assets/sofmap_512.png')
@@ -22,11 +22,11 @@ class Sofmap extends THREE.Object3D
     texture.repeat.set( 3, 3 * 2 )
     material.needsUpdate = true
 
-    geometry = new THREE.PlaneGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
+    geometry = new THREE.PlaneBufferGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
     geometry.applyMatrix( new THREE.Matrix4().makeTranslation( -200, 0, 0 ) )
     @planeLeft = new THREE.Mesh(geometry, material)
 
-    geometry = new THREE.PlaneGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
+    geometry = new THREE.PlaneBufferGeometry(GEO_W, GEO_H, _SEGMENT_X, _SEGMENT_Y)
     geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 200, 0, 0 ) )
     @planeRight = new THREE.Mesh(geometry, material)
     @planeRight.rotation.y = -75 * Math.PI / 180
