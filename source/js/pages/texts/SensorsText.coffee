@@ -38,11 +38,13 @@ class SensorsText extends BaseWorld
     box = @textGeometry.boundingBox
     height =  box.max.y - box.min.y
     centerY = (box.max.y - box.min.y) >> 1
+    centerY -= 15
 
     console.log box.max.y, box.min.y, height, centerY
 
     ease = 'easeOutCubic'
     targetAmp = Math.PI * 4
+    PI_Half = Math.PI / 2
     _.each(@_text.geometry.vertices, (vertex, i)=>
       originVertex = @originalBox.vertices[i]
 
@@ -76,8 +78,8 @@ class SensorsText extends BaseWorld
         ampZ: targetAmp
         delay: delayZ
         ease: ease
-        onUpdate: =>
-          vertex.z = originVertex.z + Math.sin(obj.ampZ + alpha ) * obj.radius
+        onUpdate: ->
+          vertex.z = originVertex.z + Math.cos(obj.ampZ + PI_Half + alpha ) * obj.radius
       })
     )
 
@@ -114,7 +116,7 @@ class SensorsText extends BaseWorld
   _setupText: ->
     theText = 'SENSORS'
     theText = 'セ・リーグ'
-    theText = 'ー'
+    theText = 'あ'
     @textGeometry = new THREE.TextGeometry(theText,
       size: 80
       height: 0
@@ -140,7 +142,7 @@ class SensorsText extends BaseWorld
       color: 0xffffff
       shading: THREE.FlatShading
       vertexColors: THREE.VertexColors
-#      wireframe: true
+      wireframe: true
     )
     @_setVertexColor()
 

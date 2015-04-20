@@ -43,12 +43,12 @@ ready do
 
 
   # open
-  url = "http://#{my_address}:4567/"
-  command = "open -a \"Google Chrome Canary\" #{url}"
-  puts "url: #{url}"
-  puts "command: #{command}"
-
-  system command
+  # url = "http://#{my_address}:4567/"
+  # command = "open -a \"Google Chrome Canary\" #{url}"
+  # puts "url: #{url}"
+  # puts "command: #{command}"
+  #
+  # system command
 end
 
 
