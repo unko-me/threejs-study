@@ -1,0 +1,1 @@
+(function(){var e;e=function(){function e(e,t){null==e&&(e=4),this.WIDTH=e,this.camera=new THREE.Camera,this.camera.position.z=1,this.gl=t.getContext()}return e}(),"function"==typeof define&&define.amd?define(function(){return e}):"object"==typeof exports?exports.SimpleRTT=e:window.SimpleRTT=e}).call(this);
